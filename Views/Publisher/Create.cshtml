@@ -1,4 +1,6 @@
-﻿@*@model Publisher
+﻿@using Web1670.Models
+
+@model Publisher
 <form asp-controller="Publisher" asp-action="Create" method="post">
     Name: <input type="text" asp-for="pubName" /><span asp-validation-for="pubName"></span>
     <br />
@@ -12,4 +14,4 @@
 </form>
 @section scripts{
     <partial name="_ValidationScriptsPartial" />
-}*@
+}

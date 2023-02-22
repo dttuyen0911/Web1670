@@ -1,14 +1,16 @@
-﻿@*@model Book
+﻿@using Web1670.Models
 
+@model Book
 <form asp-controller="Book" asp-action="Edit" method="post">
     Name: <input type="text" asp-for="bookName" /><span asp-validation-for="bookName"></span>
     <br />
     Des:<input type="text" asp-for="bookDescription" />
     <br />
+    Price:<input type="text" asp-for="bookPrice" />
     <div class="form-group">
         <label asp-for="Publisher" class="control-label"></label>
-        <select asp-for="pubID" asp-items="@ViewBag.pubID" class="form-control">
-            <option>Select publisher</option>
+        <select asp-for="Publisher" asp-items="@ViewBag.pubID" class="form-control">
+            <option>select category</option>
         </select>
 
     </div>
@@ -18,4 +20,3 @@
 @section scripts{
     <partial name="_ValidationScriptsPartial" />
 }
-*@
