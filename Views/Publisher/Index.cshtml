@@ -1,0 +1,29 @@
+﻿@*@model IEnumerable<Publisher>
+<a class=" btn btn-primary" asp-controller="Publisher" asp-action="Create">Add new</a>
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Address</th>
+        <th>Telephone</th>
+    </tr>
+    @foreach (var publisher in Model)
+    {
+        <tr>
+            <th>@publisher.pubID</th>
+            <th>@publisher.pubName</th>
+            <th>@publisher.pubDescription</th>
+            <th>@publisher.pubAddress</th>
+            <th>@publisher.pubTelephone</th>
+            <td>
+                <a asp-action="Edit" asp-route-id=@publisher.pubID> Edit</a>
+                <a asp-action="Delete" asp-route-id=@publisher.pubID onclick="return confirm('Are you sure');"> Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+*@

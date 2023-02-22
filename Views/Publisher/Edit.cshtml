@@ -1,0 +1,15 @@
+﻿@*@model Publisher
+<form asp-controller="Publisher" asp-action="Edit" method="post">
+    Name: <input type="text" asp-for="pubName" /><span asp-validation-for="pubName"></span>
+    <br />
+    Description: <input type="text" asp-for="pubDescription" /><span asp-validation-for="pubDescription"></span>
+    <br />
+    Address: <input type="text" asp-for="pubAddress" /><span asp-validation-for="pubAddress"></span>
+    <br />
+    Telephone: <input type="text" asp-for="pubTelephone" /><span asp-validation-for="pubTelephone"></span>
+    <br />
+    <input type="submit" value="Submit" />
+</form>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}*@

@@ -1,32 +1,31 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Web1670.Models;
 
 namespace Web1670.Controllers
 {
-    public class BookController : Controller
+    public class PublisherController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        public BookController(ApplicationDbContext dbContext)// được tạo từ đăng kí dịch vụ
+        public PublisherController (ApplicationDbContext dbContext)// được tạo từ đăng kí dịch vụ
         {
             _dbContext = dbContext;
         }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Publisher> categories = _dbContext.publishers.ToList();
+            return View(categories);
         }
         public IActionResult Create()
         {
-            ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Book obj)
+        public IActionResult Create(Publisher obj)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.books.Add(obj);
+                _dbContext.publishers.Add(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -34,9 +33,7 @@ namespace Web1670.Controllers
         }
         public IActionResult Edit(int id)
         {
-
-            ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
-            Book obj = _dbContext.books.Find(id);
+            Publisher obj = _dbContext.publishers.Find(id);
             if (obj == null)
             {
                 return RedirectToAction("Index");
@@ -44,12 +41,12 @@ namespace Web1670.Controllers
             return View(obj);
         }
         [HttpPost]
-        public IActionResult Edit(int id, Book obj)// id lấy ra từ thanh địa ở định tuyến định tuyến 
+        public IActionResult Edit(int id, Publisher obj)// id lấy ra từ thanh địa ở định tuyến định tuyến 
         {
             if (ModelState.IsValid)
             {
                 obj.pubID = id;
-                _dbContext.books.Add(obj);
+                _dbContext.publishers.Add(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -57,8 +54,8 @@ namespace Web1670.Controllers
         }
         public IActionResult Delete(int id)
         {
-            Book obj = _dbContext.books.Find(id);
-            _dbContext.books.Remove(obj);
+            Publisher obj = _dbContext.publishers.Find(id);
+            _dbContext.publishers.Remove(obj);
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
