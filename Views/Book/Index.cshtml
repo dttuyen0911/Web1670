@@ -1,1 +1,30 @@
-﻿
+﻿@using Web1670.Models
+@model IEnumerable<Book>
+
+<a class=" btn btn-primary" asp-controller="Book" asp-action="Create">Add new</a>
+<table class="table table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Des</th>
+        <th>Price</th>
+        <th>Publisher Name</th>
+    </tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <th>@book.bookID</th>
+            <th>@book.bookName</th>
+            <th>@book.bookDescription</th>
+            <th>@book.bookPrice</th>
+            <th>@book.Publisher.pubID</th>
+            <td>
+                <a asp-action="Edit" asp-route-id=@book.bookID> Edit</a>
+                <a asp-action="Delete" asp-route-id=@book.bookID onclick="return confirm('Are you sure');"> Delete</a>
+                <a asp-action="AddToCart"
+               asp-route-id="@book.bookID"
+               class="btn btn-secondary btn-sm float-right">Đặt hàng</a>
+            </td>
+        </tr>
+    }
+</table>
