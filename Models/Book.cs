@@ -7,6 +7,7 @@ namespace Web1670.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public int bookID { get; set; }
         public string bookName { get; set; }
         public string bookDescription { get; set; }

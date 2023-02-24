@@ -19,6 +19,5 @@ namespace GC02Identity.Data
             modelBuilder.Entity<OrderDetail>().HasKey(m => new { m.orderID, m.bookID });
             base.OnModelCreating(modelBuilder);
         }
-        
     }
 }
