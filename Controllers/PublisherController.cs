@@ -13,8 +13,8 @@ namespace Web1670.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Publisher> categories = _dbContext.publishers.ToList();
-            return View(categories);
+            IEnumerable<Publisher> publishers = _dbContext.publishers.ToList();
+            return View(publishers);
         }
         public IActionResult Create()
         {

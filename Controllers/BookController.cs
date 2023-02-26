@@ -1,6 +1,7 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Web1670.Models;
 
 namespace Web1670.Controllers
@@ -14,7 +15,8 @@ namespace Web1670.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Book> books = _dbContext.books.Include(p => p.Publisher).ToList();
+            return View(books);
         }
         public IActionResult Create()
         {
