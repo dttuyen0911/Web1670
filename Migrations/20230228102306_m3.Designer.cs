@@ -4,6 +4,7 @@ using GC02Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230228102306_m3")]
+    partial class m3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,23 +284,9 @@ namespace Web1670.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(2);
 
-                    b.Property<double>("amount")
-                        .HasColumnType("float");
-
-                    b.Property<int>("bookID1")
-                        .HasColumnType("int");
-
-                    b.Property<double>("price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("quantity")
-                        .HasColumnType("int");
-
                     b.HasKey("orderID", "bookID");
 
                     b.HasIndex("bookID");
-
-                    b.HasIndex("bookID1");
 
                     b.ToTable("orderdetails");
                 });
@@ -403,7 +391,7 @@ namespace Web1670.Migrations
 
                     b.HasOne("Web1670.Models.Book", "book")
                         .WithMany()
-                        .HasForeignKey("bookID1")
+                        .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -14,6 +14,9 @@ namespace Web1670.Models
         [ForeignKey("bookID")]
         public virtual Order order { get; set; }
         [ForeignKey("orderID")]
+        public double price { get; set; }
+        public int quantity { get; set; }
+        public double amount { get; set; }
         public virtual Book book { get; set; }
     }
 }
