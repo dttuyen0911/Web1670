@@ -9,7 +9,7 @@ namespace Web1670.Controllers
     public class BookController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        public BookController(ApplicationDbContext dbContext)// được tạo từ đăng kí dịch vụ
+        public BookController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -20,7 +20,8 @@ namespace Web1670.Controllers
         }
         public IActionResult Create()
         {
-            ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
+   
+            ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
             return View();
         }
         [HttpPost]
@@ -29,14 +30,14 @@ namespace Web1670.Controllers
             if (ModelState.IsValid)
             {
                 _dbContext.books.Add(obj);
-                _dbContext.SaveChanges();
+                _dbContext.SaveChanges(); 
                 return RedirectToAction("Index");
             }
             return View(obj);
+           
         }
         public IActionResult Edit(int id)
         {
-
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
             Book obj = _dbContext.books.Find(id);
             if (obj == null)
@@ -46,12 +47,12 @@ namespace Web1670.Controllers
             return View(obj);
         }
         [HttpPost]
-        public IActionResult Edit(int id, Book obj)// id lấy ra từ thanh địa ở định tuyến định tuyến 
+        public IActionResult Edit(int id, Book obj)
         {
             if (ModelState.IsValid)
             {
-                obj.pubID = id;
-                _dbContext.books.Add(obj);
+                obj.bookID = id;
+                _dbContext.books.Update(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }

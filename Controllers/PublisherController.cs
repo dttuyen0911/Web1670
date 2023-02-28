@@ -41,12 +41,12 @@ namespace Web1670.Controllers
             return View(obj);
         }
         [HttpPost]
-        public IActionResult Edit(int id, Publisher obj)// id lấy ra từ thanh địa ở định tuyến định tuyến 
+        public IActionResult Edit(int id, Publisher obj)
         {
             if (ModelState.IsValid)
             {
                 obj.pubID = id;
-                _dbContext.publishers.Add(obj);
+                _dbContext.publishers.Update(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }

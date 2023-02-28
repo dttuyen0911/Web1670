@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GC02Identity.Data.Migrations
+namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230222122752_add2")]
-    partial class add2
+    [Migration("20230228094221_m2")]
+    partial class m2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -367,7 +367,7 @@ namespace GC02Identity.Data.Migrations
             modelBuilder.Entity("Web1670.Models.Book", b =>
                 {
                     b.HasOne("Web1670.Models.Publisher", "Publisher")
-                        .WithMany("book")
+                        .WithMany("Books")
                         .HasForeignKey("pubID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -377,14 +377,14 @@ namespace GC02Identity.Data.Migrations
 
             modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
                 {
-                    b.HasOne("Web1670.Models.Book", "book")
-                        .WithMany()
+                    b.HasOne("Web1670.Models.Order", "order")
+                        .WithMany("orderdetails")
                         .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web1670.Models.Order", "order")
-                        .WithMany("orderdetails")
+                    b.HasOne("Web1670.Models.Book", "book")
+                        .WithMany()
                         .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -401,7 +401,7 @@ namespace GC02Identity.Data.Migrations
 
             modelBuilder.Entity("Web1670.Models.Publisher", b =>
                 {
-                    b.Navigation("book");
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
