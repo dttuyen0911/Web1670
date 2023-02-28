@@ -3,23 +3,40 @@
 @model Book
 <form asp-controller="Book" asp-action="Edit" method="post">
     <h1>Update Book</h1>
-    <div class="mb-3">
-        Name: <input type="text" asp-for="bookName" /><span asp-validation-for="bookName"></span>
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div>
+                    Name: <input type="text" asp-for="bookName" /><span asp-validation-for="bookName"></span>
+                </div>
+                </br>
+                <div>
+                    Description:<input type="text" asp-for="bookDescription" />
+                </div>
+                </br>
+                <div>
+                    Datetime:<input type="date" asp-for="bookDate" /><span asp-validation-for="bookDate"></span>
+                </div>
+                </br>
+                <div>
+                    Quantity:<input type="text" asp-for="bookQuantity" />
+                </div>
+                </br>
+                <div>
+                    Price:<input type="text" asp-for="bookPrice" />
+                </div>
+                </br>
+                <div class="form-group">
+                    <label asp-for="Publisher" class="control-label"></label>
+                    <select asp-for="pubID" asp-items="ViewBag.pubID" class="form-control">
+                        <option>Select Publisher</option>
+                    </select>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="mb-3">
-        Des:<input type="text" asp-for="bookDescription" />
-    </div>
-    <div class="mb-3">
-        Price:<input type="text" asp-for="bookPrice" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Publisher" class="control-label"></label>
-        <select asp-for="pubID" asp-items="ViewBag.pubID" class="form-control">
-            <option>Select Publisher</option>
-        </select>
-    </div>
-    <br />
     <input type="submit" value="Submit" />
+    <a asp-action="Index"> Back to list</a>
 </form>
 @section scripts{
     <partial name="_ValidationScriptsPartial" />

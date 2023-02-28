@@ -7,6 +7,8 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Datetime</th>
+        <th>Quantity</th>
         <th>Price</th>
         <th>Publisher</th>
     </tr>
@@ -16,6 +18,8 @@
             <th>@book.bookID</th>
             <th>@book.bookName</th>
             <th>@book.bookDescription</th>
+            <th>@book.bookDate.ToShortDateString()</th>
+            <th>@book.bookQuantity</th>
             <th>@book.bookPrice</th>
             <th>@book.Publisher.pubID</th>
             <td>
