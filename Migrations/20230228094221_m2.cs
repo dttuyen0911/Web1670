@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace GC02Identity.Data.Migrations
+namespace Web1670.Migrations
 {
-    public partial class add5 : Migration
+    public partial class m2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

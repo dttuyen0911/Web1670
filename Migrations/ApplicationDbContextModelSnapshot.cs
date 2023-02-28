@@ -4,18 +4,16 @@ using GC02Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GC02Identity.Data.Migrations
+namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230226135652_add4")]
-    partial class add4
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -367,7 +365,7 @@ namespace GC02Identity.Data.Migrations
             modelBuilder.Entity("Web1670.Models.Book", b =>
                 {
                     b.HasOne("Web1670.Models.Publisher", "Publisher")
-                        .WithMany("book")
+                        .WithMany("Books")
                         .HasForeignKey("pubID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -377,14 +375,14 @@ namespace GC02Identity.Data.Migrations
 
             modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
                 {
-                    b.HasOne("Web1670.Models.Book", "book")
-                        .WithMany()
+                    b.HasOne("Web1670.Models.Order", "order")
+                        .WithMany("orderdetails")
                         .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web1670.Models.Order", "order")
-                        .WithMany("orderdetails")
+                    b.HasOne("Web1670.Models.Book", "book")
+                        .WithMany()
                         .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -401,7 +399,7 @@ namespace GC02Identity.Data.Migrations
 
             modelBuilder.Entity("Web1670.Models.Publisher", b =>
                 {
-                    b.Navigation("book");
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

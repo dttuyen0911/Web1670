@@ -12,11 +12,10 @@ namespace Web1670.Models
         public string bookName { get; set; }
         public string bookDescription { get; set; }
         //public IFormFile bookUpload { get; set; }
+        //public DateTime bookDate { get; set; }
         public double bookPrice { get; set; }
         public int pubID { get; set; }
-        [ForeignKey("pubID")] //take cate_id is foreignKey
-        //public int cart_id { get; set; }
-        //[ForeignKey("cart_id")]
-        public virtual Publisher? Publisher { get; set; }
+        [ForeignKey("pubID")]
+        public virtual Publisher? Publisher{ get; set; }
     }
 }
