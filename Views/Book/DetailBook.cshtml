@@ -1,0 +1,29 @@
+﻿@using Web1670.Models
+@model Book;
+
+
+<div class="container-fluid py-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Detail Book</span></h2>
+    </div>
+    <div class="row px-xl-5">
+        <div class="col-lg-5 pb-5">
+            <div id="" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner border">
+                    <div class="carousel-item active">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp" class="card-img-top">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 pb-5">
+            <h3 class="font-weight-semi-bold">Name: @Model.bookName</h3>
+            <h3 class="font-weight-semi-bold mb-4">Price: @Model.bookPrice</h3>
+            <p class="mb-4">Description: @Model.bookDescription</p>
+            <p class="mb-4">Date: @Model.bookDate.ToShortDateString()</p>
+            <p class="mb-4">Quantity: @Model.bookQuantity</p>
+            <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+            <a asp-controller="Home" asp-action="Index"><button class="btn btn-warning"> Back to list</a>
+        </div>
+    </div> 
+</div>

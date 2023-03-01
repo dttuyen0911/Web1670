@@ -1,0 +1,69 @@
+﻿@using Web1670.Models
+@model List<Cart>
+
+@if (Model.Count > 0)
+{
+
+    decimal total = 0;
+    int stt = 1;
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Book</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        @foreach (var cartitem in Model)
+        {
+            var Total = cartitem.cartQuantity*cartitem.book.bookPrice;
+            total += Total;
+
+            <tr>
+                <td>@(stt++)</td>
+                <td>@cartitem.book.bookName</td>
+                <td>@(cartitem.book.bookPrice.ToString("n0"))</td>
+
+                <td><input asp-for="@cartitem.cartQuantity" id="@($"quantity-{cartitem.book.bookID}")" /></td>
+
+                <td>@(Total.ToString("n0"))</td>
+                <td>
+                    <button class="btn btn-success updatecartitem" data-id="@cartitem.book.bookID">Update</button>
+                    <a asp-action="removecart" asp-route-id="@cartitem.book.bookID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-right">Total Money</td>
+            <td>@(total.ToString("n0"))</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <a asp-controller="Book" asp-action="Checkout" class="btn btn-success">Checkout</a>
+
+    @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $(".updatecartitem").click(function (event) {
+                event.preventDefault();
+                var bookid = $(this).attr("data-id");
+                var quantity = $("#quantity-" + bookid).val();
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.RouteUrl("UpdateCart")",
+                    data: {
+                        id: bookid,
+                        quanty: quantity
+                    },
+                    success: function (result) {
+                        window.location.href = "@Url.RouteUrl("Cart")";
+                    }
+                });
+            });
+        });
+    </script>
+      }
+}

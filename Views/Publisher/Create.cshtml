@@ -1,8 +1,14 @@
 ﻿@using Web1670.Models
 
 @model Publisher
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 <form asp-controller="Publisher" asp-action="Create" method="post">
-    <h1>Create Publisher</h1>
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Create Publisher</span></h2>
+    </div>
     <div class="card">
         <div class="card-body">
             <form>
