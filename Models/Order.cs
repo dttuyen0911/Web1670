@@ -7,6 +7,7 @@ namespace Web1670.Models
         [Key]
         public int orderID { get; set; }
         //public string cus_name { get; set; }
+        public double OrderTotal { get; set; }
         public virtual ICollection<OrderDetail> orderdetails { get; set; }
     }
 }

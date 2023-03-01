@@ -7,7 +7,7 @@ namespace Web1670.Controllers
     public class PublisherController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        public PublisherController (ApplicationDbContext dbContext)// được tạo từ đăng kí dịch vụ
+        public PublisherController(ApplicationDbContext dbContext)// được tạo từ đăng kí dịch vụ
         {
             _dbContext = dbContext;
         }

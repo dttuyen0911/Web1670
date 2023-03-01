@@ -1,8 +1,14 @@
 ﻿@using Web1670.Models
 
 @model Book
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
 <form asp-controller="Book" asp-action="Edit" method="post">
-    <h1>Update Book</h1>
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Update Book</span></h2>
+    </div>>
     <div class="card">
         <div class="card-body">
             <form>

@@ -1,8 +1,45 @@
-﻿@{
+﻿@using Web1670.Models
+@model IEnumerable<Book>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@*<div class="card" style="width: 18rem;">
+    @foreach(var book in Model){
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@book.bookName</h5>
+            <p class="card-text">@book.bookDescription</p>
+            <a href="#" class="btn btn-primary">View detail</a>
+        </div>
+    }
+    </br>
+</div>*@
+
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Book</span></h2>
+    </div>
+    <div class="row px-xl-5 pb-3">
+         @foreach (var book in Model)
+                {
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="card product-item border-0 mb-4">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Name: @book.bookName</h5>
+                        <p class="card-text">Description: @book.bookDescription</p>
+                        <p class="card-text">Price: @book.bookPrice</p>
+                    </div>
+                <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a asp-controller="Book" asp-action="DetailBook" asp-route-id=@book.bookID>View Detail</a>
+                        <a asp-controller="Book" asp-action="AddToCart" asp-route-id=@book.bookID>Add to cart</a>
+                        <a asp-controller="Order" asp-action="Index"><i class="fas fa-shopping-cart text-primary mr-1"></i>Order</a>
+                        <a asp-controller="OrderDetail" asp-action="Index"><i class="fas fa-shopping-cart text-primary mr-1"></i>OrderDetail</a>
+                </div>
+            </div>
+
+        </div>
+        }
+    </div>
 </div>
