@@ -32,10 +32,8 @@
                         <p class="card-text">Price: @book.bookPrice</p>
                     </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a asp-controller="Book" asp-action="DetailBook" asp-route-id=@book.bookID>View Detail</a>
-                        <a asp-controller="Book" asp-action="AddToCart" asp-route-id=@book.bookID>Add to cart</a>
-                        <a asp-controller="Order" asp-action="Index"><i class="fas fa-shopping-cart text-primary mr-1"></i>Order</a>
-                        <a asp-controller="OrderDetail" asp-action="Index"><i class="fas fa-shopping-cart text-primary mr-1"></i>OrderDetail</a>
+                    <a asp-controller = "Book" asp-action="AddToCart" asp-route-id="@book.bookID " class="btn btn-primary btn-sm float-right">Add To Cart</a>
+                    <a asp-controller = "Book" asp-action="DetailBook" asp-route-id="@book.bookID " class="btn btn-warning btn-sm float-right">View Detail</a>
                 </div>
             </div>
 
