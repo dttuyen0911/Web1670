@@ -1,4 +1,6 @@
-﻿
+﻿@using Web1670.Models
+@model List<Cart>
+
 <div class="container-fluid pt-5">
     <div class="row px-xl-5">
         <div class="col-lg-8">
@@ -87,7 +89,33 @@
                 <div class="card-header bg-secondary border-0">
                     <h4 class="font-weight-semi-bold m-0">Order Total</h4>
                 </div>
-                <div class="card-body">
+
+                @foreach (var cartitem in Model)
+                {
+                    decimal total = 0;
+                    int stt = 1;
+                    var Total = cartitem.cartQuantity * cartitem.book.bookPrice;
+                    total += Total;
+
+                    <tr>
+                        <td>@(stt++)</td>
+                        <td>@cartitem.book.bookName</td>
+                        <td><img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp" class="card-img-top"></td>
+                        <td>@(cartitem.book.bookPrice.ToString("n0"))</td>
+
+                        <td><input asp-for="@cartitem.cartQuantity" id="@($"quantity-{cartitem.book.bookID}")" /></td>
+
+                        <td>@(Total.ToString("n0"))</td>
+                        <td>
+                            <button class="btn btn-success updatecartitem" data-id="@cartitem.book.bookID">Update</button>
+                            <a asp-action="removecart" asp-route-id="@cartitem.book.bookID" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+
+
+                @*<div class="card-body">
                     <h5 class="font-weight-medium mb-3">Products</h5>
                     <div class="d-flex justify-content-between">
                         <p>Colorful Stylish Shirt 1</p>
@@ -102,13 +130,9 @@
                         <p>$150</p>
                     </div>
                     <hr class="mt-0">
-                    <div class="d-flex justify-content-between mb-3 pt-1">
-                        <h6 class="font-weight-medium">Subtotal</h6>
-                        <h6 class="font-weight-medium">$150</h6>
-                    </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Shipping</h6>
-                        <h6 class="font-weight-medium">$10</h6>
+                        <h6 class="font-weight-medium">Free</h6>
                     </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
@@ -116,10 +140,10 @@
                         <h5 class="font-weight-bold">Total</h5>
                         <h5 class="font-weight-bold">$160</h5>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="card-footer border-secondary bg-transparent">
-                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Order</button>
+                <a asp-controller="OrderDetail" asp-action="Index" class="btn btn-success">Order</a>
             </div>
         </div>
     </div>

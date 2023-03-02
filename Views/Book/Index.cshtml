@@ -5,31 +5,45 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<a class=" btn btn-primary" asp-controller="Book" asp-action="Create">Add book</a>
-<table class="table table-hover">
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Datetime</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Publisher</th>
-    </tr>
-    @foreach (var book in Model)
-    {
-        <tr>
-            <th>@book.bookID</th>
-            <th>@book.bookName</th>
-            <th>@book.bookDescription</th>
-            <th>@book.bookDate.ToShortDateString()</th>
-            <th>@book.bookQuantity</th>
-            <th>@book.bookPrice</th>
-            <th>@book.Publisher.pubID</th>
-            <td>
-                <a asp-action="Edit" asp-route-id=@book.bookID> Edit</a>
-                <a asp-action="Delete" asp-route-id=@book.bookID onclick="return confirm('Are you sure');"> Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+
+<div class="container-fluid pt-4 px-4">
+    <a class=" btn btn-primary" asp-controller="Book" asp-action="Create">Add book</a>
+        <div class="row g-4">
+             <div class="col-sm-12 col-xl-12">
+                  <div class="bg-light rounded h-100 p-4">
+                      <h6 class="mb-4">Basic Table</h6>
+                          <table class="table">
+                          <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Datetime</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Publisher</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                            @foreach (var book in Model)
+                            {
+                            <tr>
+                                <th>@book.bookID</th>
+                                <th>@book.bookName</th>
+                                <th>@book.bookDescription</th>
+                                <th>@book.bookDate.ToShortDateString()</th>
+                                <th>@book.bookQuantity</th>
+                                <th>@book.bookPrice</th>
+                                <th>@book.Publisher.pubID</th>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id=@book.bookID> Edit</a>
+                                    <a asp-action="Delete" asp-route-id=@book.bookID onclick="return confirm('Are you sure');"> Delete</a>
+                                </td>
+                            </tr>
+                            }
+                          </tbody>
+                          </table>
+                  </div>
+             </div>
+        </div>
+</div>

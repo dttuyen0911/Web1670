@@ -1,5 +1,6 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -159,5 +160,6 @@ namespace Web1670.Controllers
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
+       
     }
 }
