@@ -5,23 +5,20 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web1670.Migrations
 {
-    public partial class m3 : Migration
+    public partial class m1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropColumn(
+                name: "bookImageName",
+                table: "books");
+
             migrationBuilder.AddColumn<DateTime>(
                 name: "bookDate",
                 table: "books",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-            migrationBuilder.AddColumn<int>(
-                name: "bookQuantity",
-                table: "books",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -30,9 +27,12 @@ namespace Web1670.Migrations
                 name: "bookDate",
                 table: "books");
 
-            migrationBuilder.DropColumn(
-                name: "bookQuantity",
-                table: "books");
+            migrationBuilder.AddColumn<string>(
+                name: "bookImageName",
+                table: "books",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
     }
 }

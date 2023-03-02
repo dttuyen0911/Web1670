@@ -26,12 +26,12 @@
                 <div>
                     Telephone: <input type="text" asp-for="pubTelephone" /><span asp-validation-for="pubTelephone"></span>
                 </div>
-                </br>
+                </br>   
+                <input type="submit" value="Submit" />
+                <a asp-action="Index"> Back to list</a>
             </form>
         </div>
     </div>
-    <input type="submit" value="Submit" />
-    <a asp-action="Index"> Back to list</a>
 </form>
 @*@section scripts{
     <partial name="_ValidationScriptsPartial" />

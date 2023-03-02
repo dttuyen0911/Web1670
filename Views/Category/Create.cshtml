@@ -1,33 +1,32 @@
 ﻿@using Web1670.Models
-
-@model Publisher
+@model Category
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<form asp-controller="Publisher" asp-action="Edit" method="post">
+<form asp-controller="Category" asp-action="Create" method="post">
     <div class="text-center mb-4">
-        <h2 class="section-title px-5"1<span class="px-2">Update Publisher</span></h2>
+        <h2 class="section-title px-5"><span class="px-2">Create Category</span></h2>
     </div>
     <div class="card">
         <div class="card-body">
             <form>
                 <div>
-                    Name: <input type="text" asp-for="pubName" /><span asp-validation-for="pubName"></span>
+                    Name: <input type="text" asp-for="cateName" /><span asp-validation-for="cateName"></span>
                 </div>
                 </br>
                 <div>
-                    Description: <input type="text" asp-for="pubDescription" /><span asp-validation-for="pubDescription"></span>
+                    Description: <input type="text" asp-for="cateDescription" /><span asp-validation-for="cateDescription"></span>
                 </div>
                 </br>
                 <div>
-                    Address: <input type="text" asp-for="pubAddress" /><span asp-validation-for="pubAddress"></span>
+                    Address: <input type="text" asp-for="cateAddress" /><span asp-validation-for="cateAddress"></span>
                 </div>
                 </br>
                 <div>
-                    Telephone: <input type="text" asp-for="pubTelephone" /><span asp-validation-for="pubTelephone"></span>
+                    Telephone: <input type="text" asp-for="cateTelephone" /><span asp-validation-for="cateTelephone"></span>
                 </div>
-                </br>    
+                </br>
                 <input type="submit" value="Submit" />
                 <a asp-action="Index"> Back to list</a>
             </form>
