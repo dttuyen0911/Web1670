@@ -14,10 +14,13 @@ namespace GC02Identity.Data
         public DbSet<Book> books { get; set; }
         public DbSet<Order> orders { get; set; }
         public DbSet<OrderDetail> orderdetails { get; set; }
+        public DbSet<Category> categories { get; set; }
+        public DbSet<Cart> carts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderDetail>().HasKey(m => new { m.orderID, m.bookID });
             base.OnModelCreating(modelBuilder);
+
         }
 
     }

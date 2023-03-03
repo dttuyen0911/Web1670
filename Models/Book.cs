@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web1670.Models
@@ -11,12 +12,15 @@ namespace Web1670.Models
         public int bookID { get; set; }
         public string bookName { get; set; }
         public string bookDescription { get; set; }
-        //public IFormFile bookUpload { get; set; }
+        
         public DateTime bookDate { get; set; }
         public int bookQuantity { get; set; }
+        public int pubID  { get; set; }
+        public int cateID { get; set; }
         public decimal bookPrice { get; set; }
-        public int pubID { get; set; }
         [ForeignKey("pubID")]
-        public virtual Publisher? Publisher { get; set; }
+        public virtual Publisher Publisher { get; set; }
+        [ForeignKey("cateID")]
+        public virtual Category Category { get; set; }
     }
 }

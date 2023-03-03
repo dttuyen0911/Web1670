@@ -15,11 +15,6 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
-        public IActionResult Index()
-        {
-            IEnumerable<Book> books = _dbContext.books.Include(p => p.Publisher).ToList();
-            return View(books);
-        }
         public const string CARTKEY = "cart";
         List<Cart> GetCartItems()
         {
@@ -48,7 +43,7 @@ namespace Web1670.Controllers
         {
             var book = _dbContext.books.Where(p => p.bookID == id).FirstOrDefault();
             if (book == null)
-                return NotFound("No pound book");
+                return NotFound("Cart empty");
 
             var cart = GetCartItems();
             var cartitem = cart.Find(p => p.book.bookID == id);
@@ -106,17 +101,30 @@ namespace Web1670.Controllers
             // Xử lý khi đặt hàng
             return View();
         }
-
-
+        public IActionResult Index()
+        {
+            IEnumerable<Book> books = _dbContext.books.ToList();
+            return View(books);
+        }
+        //public IActionResult SearchBook(string name)
+        //{
+        //    IEnumerable<Book> books = _dbContext.books.ToList();
+        //    var search = books.Where(b => b.bookName == name).FirstOrDefault();
+        //    return View(search);
+        //}
         public IActionResult DetailBook(int id)
         {
-            IEnumerable<Book> books = _dbContext.books.Include(p => p.Publisher).ToList();
+           
+            IEnumerable<Book> books = _dbContext.books
+                
+                .ToList();
             var detailBook = books.Where(b => b.bookID == id).FirstOrDefault();
             return View(detailBook);
         }
         public IActionResult Create()
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
+            ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View();
         }
         [HttpPost]
@@ -134,6 +142,7 @@ namespace Web1670.Controllers
         public IActionResult Edit(int id)
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
+            ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             Book obj = _dbContext.books.Find(id);
             if (obj == null)
             {

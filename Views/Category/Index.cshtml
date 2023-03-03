@@ -1,0 +1,48 @@
+﻿@using Web1670.Models
+
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <a class=" btn btn-primary" asp-controller="Category" asp-action="Create">Add Publisher</a>
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Category table</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Address</th>
+                            <th>Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model)
+                        {
+                            <tr>
+                                <th>@category.cateID</th>
+                                <th>@category.cateName</th>
+                                <th>@category.cateDescription</th>
+                                <th>@category.cateAddress</th>
+                                <th>@category.cateTelephone</th>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id=@category.cateID> Edit</a>
+                                    <a asp-action="Delete" asp-route-id=@category.cateID> onclick="return confirm('Are you sure');"> Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

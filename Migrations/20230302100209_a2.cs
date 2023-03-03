@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web1670.Migrations
 {
-    public partial class m1 : Migration
+    public partial class a2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,11 +49,28 @@ namespace Web1670.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "categories",
+                columns: table => new
+                {
+                    cateID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cateName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cateDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cateAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cateTelephone = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_categories", x => x.cateID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "orders",
                 columns: table => new
                 {
                     orderID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderTotal = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,18 +207,25 @@ namespace Web1670.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     bookName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     bookDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    bookPrice = table.Column<double>(type: "float", nullable: false),
-                    pubID = table.Column<int>(type: "int", nullable: false)
+                    bookImageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    bookQuantity = table.Column<int>(type: "int", nullable: false),
+                    bookPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    pubID = table.Column<int>(type: "int", nullable: true),
+                    cateID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_books", x => x.bookID);
                     table.ForeignKey(
+                        name: "FK_books_categories_cateID",
+                        column: x => x.cateID,
+                        principalTable: "categories",
+                        principalColumn: "cateID");
+                    table.ForeignKey(
                         name: "FK_books_publishers_pubID",
                         column: x => x.pubID,
                         principalTable: "publishers",
-                        principalColumn: "pubID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "pubID");
                 });
 
             migrationBuilder.CreateTable(
@@ -209,14 +233,19 @@ namespace Web1670.Migrations
                 columns: table => new
                 {
                     orderID = table.Column<int>(type: "int", nullable: false),
-                    bookID = table.Column<int>(type: "int", nullable: false)
+                    bookID = table.Column<int>(type: "int", nullable: false),
+                    price = table.Column<double>(type: "float", nullable: false),
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    amount = table.Column<double>(type: "float", nullable: false),
+                    OrderDetailDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    bookID1 = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_orderdetails", x => new { x.orderID, x.bookID });
                     table.ForeignKey(
-                        name: "FK_orderdetails_books_orderID",
-                        column: x => x.orderID,
+                        name: "FK_orderdetails_books_bookID1",
+                        column: x => x.bookID1,
                         principalTable: "books",
                         principalColumn: "bookID",
                         onDelete: ReferentialAction.Cascade);
@@ -268,6 +297,11 @@ namespace Web1670.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_books_cateID",
+                table: "books",
+                column: "cateID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_books_pubID",
                 table: "books",
                 column: "pubID");
@@ -276,6 +310,11 @@ namespace Web1670.Migrations
                 name: "IX_orderdetails_bookID",
                 table: "orderdetails",
                 column: "bookID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orderdetails_bookID1",
+                table: "orderdetails",
+                column: "bookID1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -309,6 +348,9 @@ namespace Web1670.Migrations
 
             migrationBuilder.DropTable(
                 name: "orders");
+
+            migrationBuilder.DropTable(
+                name: "categories");
 
             migrationBuilder.DropTable(
                 name: "publishers");

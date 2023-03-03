@@ -22,6 +22,7 @@
                             <th>Quantity</th>
                             <th>Price</th>
                             <th>Publisher</th>
+                            <th>Category</th>
                           </tr>
                           </thead>
                           <tbody>
@@ -34,7 +35,8 @@
                                 <th>@book.bookDate.ToShortDateString()</th>
                                 <th>@book.bookQuantity</th>
                                 <th>@book.bookPrice</th>
-                                <th>@book.Publisher.pubID</th>
+                                <th>@book.pubID</th>
+                                <th>@book.cateID</th>
                                 <td>
                                     <a asp-action="Edit" asp-route-id=@book.bookID> Edit</a>
                                     <a asp-action="Delete" asp-route-id=@book.bookID onclick="return confirm('Are you sure');"> Delete</a>

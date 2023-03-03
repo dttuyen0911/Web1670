@@ -22,8 +22,8 @@
             <p class="mb-4">Description: @Model.bookDescription</p>
             <p class="mb-4">Date: @Model.bookDate.ToShortDateString()</p>
             <p class="mb-4">Quantity: @Model.bookQuantity</p>
-            <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-            <a asp-controller="Home" asp-action="Index"><button class="btn btn-warning"> Back to list</a>
+            <a asp-controller="Book" asp-action="AddToCart" asp-route-id="@Model.bookID" button class="btn btn-warning">Add To Cart</a>
+            <a asp-controller="Home" asp-action="Index" button class="btn btn-primary">Back to list</a>
         </div>
     </div> 
 </div>
