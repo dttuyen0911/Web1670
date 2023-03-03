@@ -6,6 +6,7 @@ using Web1670.Models;
 
 namespace Web1670.Controllers
 {
+    [Authorize(Roles = "Admin,Owner,User")]
     public class CartController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -13,7 +14,7 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
-        [Authorize(Roles = "Admin,Owner")]
+
         public IActionResult Index()
         {
             IEnumerable<Cart> cart = _dbContext.carts.ToList();
@@ -30,6 +31,7 @@ namespace Web1670.Controllers
             }
             return new List<Cart>();
         }
+
         void ClearCart()
         {
             var session = HttpContext.Session;
@@ -67,11 +69,13 @@ namespace Web1670.Controllers
             // Chuyển đến trang hiện thị Cart
             return RedirectToAction(nameof(Cart));
         }
+
         public IActionResult Cart()
         {
             return View(GetCartItems());
         }
         [Route("/removecart/{id:int}", Name = "removecart")]
+        [Authorize(Roles = "Admin,Owner,User")]
         public IActionResult RemoveCart(int id)
         {
             var cart = GetCartItems();
@@ -85,6 +89,7 @@ namespace Web1670.Controllers
             SaveCartSession(cart);
             return RedirectToAction(nameof(Cart));
         }
+
         [HttpPost]
         [Route("/updatecart", Name = "updatecart")]
         public IActionResult UpdateCart(int id, int quanty)
@@ -100,6 +105,7 @@ namespace Web1670.Controllers
             // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
             return Ok();
         }
+
         public IActionResult CheckOut()
         {
             // Xử lý khi đặt hàng
