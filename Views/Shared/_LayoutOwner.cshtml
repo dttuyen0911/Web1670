@@ -14,6 +14,9 @@
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyMVC.styles.css" asp-append-version="true" />
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -33,11 +36,16 @@
             <!-- Nav Item - Dashboard -->
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="AppRoles" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Role</a>
+                <a class="nav-link" asp-area="" asp-controller="Publisher" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Publisher</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Account</a>
+                <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Category</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Book" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Book</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Order" asp-action="Index"><i class="fas fa-fw fa-chart-area"></i>Order</a>
             </li>
             <li class="nav-item">
                 <partial name="_LoginPartial" />
@@ -123,6 +131,9 @@
             <!-- Page level custom scripts -->
             <script src="~/admin/js/demo/chart-area-demo.js"></script>
             <script src="~/admin/js/demo/chart-pie-demo.js"></script>
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
         </div>
     </div>
 </body>

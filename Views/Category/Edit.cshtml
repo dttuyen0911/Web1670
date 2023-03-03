@@ -3,7 +3,7 @@
 @model Category
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
 <form asp-controller="Category" asp-action="Edit" method="post">
     <div class="text-center mb-4">
@@ -34,6 +34,6 @@
         </div>
     </div>
 </form>
-@section scripts{
+@*@section scripts{
     <partial name="_ValidationScriptsPartial" />
-}
+}*@
