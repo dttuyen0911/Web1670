@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Web1670.Models
+
+@model IEnumerable<IdentityUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h1>View Account</h1>
+@*<a class=" btn btn-primary" asp-controller="Admin" asp-action="Create">Add Account</a>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
