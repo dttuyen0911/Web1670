@@ -1,9 +1,12 @@
 ﻿using GC02Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using Web1670.Models;
 
 namespace Web1670.Controllers
 {
+    [Authorize(Roles = "Admin,Owner")]
     public class PublisherController : Controller
     {
         private readonly ApplicationDbContext _dbContext;

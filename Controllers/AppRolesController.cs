@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Configuration;
 
 namespace Web1670.Controllers
 {
@@ -16,7 +17,23 @@ namespace Web1670.Controllers
         public IActionResult Index()
         {
             var roles = _roleManager.Roles;
-            return View();
+            return View(roles);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();  
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(IdentityRole model)
+        {
+            if (!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
+            {
+                _roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
