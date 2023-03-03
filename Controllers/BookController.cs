@@ -20,21 +20,13 @@ namespace Web1670.Controllers
             IEnumerable<Book> books = _dbContext.books.ToList();
             return View(books);
         }
-        //public IActionResult SearchBook(string name)
-        //{
-        //    IEnumerable<Book> books = _dbContext.books.ToList();
-        //    var search = books.Where(b => b.bookName == name).FirstOrDefault();
-        //    return View(search);
-        //}
         public IActionResult DetailBook(int id)
         {
-           
-            IEnumerable<Book> books = _dbContext.books
-                
-                .ToList();
+            IEnumerable<Book> books = _dbContext.books.ToList();
             var detailBook = books.Where(b => b.bookID == id).FirstOrDefault();
             return View(detailBook);
         }
+
         public IActionResult Create()
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
@@ -46,13 +38,34 @@ namespace Web1670.Controllers
         {
             if (ModelState.IsValid)
             {
+                string fileName = UploadFile(obj);
+                obj.urlImage = fileName;
+
                 _dbContext.books.Add(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(obj);
-
         }
+        public string UploadFile(Book obj)
+        {
+            string uniqueFileName = null;
+
+            if (obj.Image != null)
+            {
+                string uploadsFoder = Path.Combine("wwwroot", "uploads");
+                // name file
+                uniqueFileName = Guid.NewGuid().ToString() + obj.bookID + obj.Image.FileName;
+                string filePath = Path.Combine(uploadsFoder, uniqueFileName);
+                // copy ve code
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    obj.Image.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
+        }
+
         public IActionResult Edit(int id)
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
@@ -65,24 +78,68 @@ namespace Web1670.Controllers
             return View(obj);
         }
         [HttpPost]
-        public IActionResult Edit(int id, Book obj)
+        public IActionResult Edit(int id, Book obj, string img)
         {
+
             if (ModelState.IsValid)
             {
-                obj.bookID = id;
-                _dbContext.books.Update(obj);
-                _dbContext.SaveChanges();
+                if (obj.Image == null)
+                {
+                    obj.urlImage = img;
+                    _dbContext.books.Update(obj);
+                    _dbContext.SaveChanges();
+                }
+                else
+                {
+                    obj.bookID = id;
+                    string uniqueFileName = UploadFile(obj);
+                    obj.urlImage = uniqueFileName;
+                    _dbContext.books.Update(obj);
+                    _dbContext.SaveChanges();
+                    img = Path.Combine("wwwroot", "uploads", img);
+                    FileInfo infor = new FileInfo(img);
+                    if (infor != null)
+                    {
+                        System.IO.File.Delete(img);
+                        infor.Delete();
+                    }
+                }
                 return RedirectToAction("Index");
             }
+            ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
+            ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View(obj);
         }
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, string img)
         {
             Book obj = _dbContext.books.Find(id);
-            _dbContext.books.Remove(obj);
-            _dbContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (obj == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                if (obj.urlImage == null)
+                {
+                    _dbContext.books.Remove(obj);
+                    _dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    img = Path.Combine("wwwroot", "uploads", img);
+                    FileInfo infor = new FileInfo(img);
+                    if (infor != null)
+                    {
+                        System.IO.File.Delete(img);
+                        infor.Delete();
+                    }
+                    _dbContext.books.Remove(obj);
+                    _dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
+            }
         }
-       
     }
 }

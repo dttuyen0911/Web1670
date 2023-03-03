@@ -3,7 +3,7 @@
 @model IEnumerable<Book>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_LayoutOnwer.cshtml";
+    Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
 
 <div class="container-fluid pt-4 px-4">
@@ -11,12 +11,13 @@
         <div class="row g-4">
              <div class="col-sm-12 col-xl-12">
                   <div class="bg-light rounded h-100 p-4">
-                      <h6 class="mb-4">Basic Table</h6>
+                      <h6 class="mb-4">Book Table</h6>
                           <table class="table">
                           <thead>
                           <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th>Description</th>
                             <th>Datetime</th>
                             <th>Quantity</th>
@@ -31,6 +32,7 @@
                             <tr>
                                 <th>@book.bookID</th>
                                 <th>@book.bookName</th>
+                                <th><img src="~/uploads/@book.urlImage" style="width: 100px; height: 100px" /></th>
                                 <th>@book.bookDescription</th>
                                 <th>@book.bookDate.ToShortDateString()</th>
                                 <th>@book.bookQuantity</th>
@@ -38,8 +40,8 @@
                                 <th>@book.pubID</th>
                                 <th>@book.cateID</th>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id=@book.bookID> Edit</a>
-                                    <a asp-action="Delete" asp-route-id=@book.bookID onclick="return confirm('Are you sure');"> Delete</a>
+                                    <a asp-action="Edit" asp-route-id=@book.bookID asp-route-img="@book.Image"> Edit</a>
+                                    <a asp-action="Delete" asp-route-id=@book.bookID asp-route-img="@book.urlImage" onclick="return confirm('Are You Sure?');"> Delete</a>
                                 </td>
                             </tr>
                             }
