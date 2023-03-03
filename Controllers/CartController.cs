@@ -13,7 +13,7 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
-
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Index()
         {
             IEnumerable<Cart> cart = _dbContext.carts.ToList();

@@ -6,7 +6,7 @@ using Web1670.Models;
 
 namespace Web1670.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Owner")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
