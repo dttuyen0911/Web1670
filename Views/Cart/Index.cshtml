@@ -1,1 +1,39 @@
-﻿
+﻿@using Web1670.Models
+@model List<Cart>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutOwner.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Cart table</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Quantity</th>
+                            <th>Book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cartitem in Model)
+                        {
+                            <tr>
+                                <th>@cartitem.cartID</th>
+                                <th>@cartitem.cartQuantity</th>
+                                <th>@cartitem.book.bookName</th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

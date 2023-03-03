@@ -1,4 +1,5 @@
 ﻿using GC02Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Web1670.Models;
@@ -11,6 +12,11 @@ namespace Web1670.Controllers
         public CartController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+        }
+        public IActionResult Index()
+        {
+            IEnumerable<Cart> cart = _dbContext.carts.ToList();
+            return View(cart);
         }
         public const string CARTKEY = "cart";
         List<Cart> GetCartItems()
