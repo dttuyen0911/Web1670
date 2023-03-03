@@ -1,9 +1,11 @@
 ﻿using GC02Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Data;
 using Web1670.Models;
 
 namespace Web1670.Controllers
@@ -15,6 +17,7 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
+
         public IActionResult Index()
         {
             IEnumerable<Book> books = _dbContext.books.ToList();
@@ -33,6 +36,7 @@ namespace Web1670.Controllers
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(Book obj)
         {
@@ -47,6 +51,7 @@ namespace Web1670.Controllers
             }
             return View(obj);
         }
+
         public string UploadFile(Book obj)
         {
             string uniqueFileName = null;
@@ -77,6 +82,7 @@ namespace Web1670.Controllers
             }
             return View(obj);
         }
+
         [HttpPost]
         public IActionResult Edit(int id, Book obj, string img)
         {
@@ -110,6 +116,7 @@ namespace Web1670.Controllers
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View(obj);
         }
+
         public IActionResult Delete(int id, string img)
         {
             Book obj = _dbContext.books.Find(id);

@@ -13,6 +13,7 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
+
         public IActionResult Index()
         {
             IEnumerable<Cart> cart = _dbContext.carts.ToList();
