@@ -26,7 +26,12 @@ namespace Web1670.Controllers
             var detailBook = books.Where(b => b.bookID == id).FirstOrDefault();
             return View(detailBook);
         }
-
+        //public IActionResult Search(string name)
+        //{
+        //    IEnumerable<Book> books = _dbContext.books.ToList();
+        //    var search = books.Where(b => b.bookName == name).FirstOrDefault();
+        //    return View(search);
+        //}
         public IActionResult Create()
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
