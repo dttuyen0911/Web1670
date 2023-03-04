@@ -92,7 +92,7 @@
 
                 @foreach (var cartitem in Model)
                 {
-                    decimal total = 0;
+                    double total = 0;
                     int stt = 1;
                     var Total = cartitem.cartQuantity * cartitem.book.bookPrice;
                     total += Total;

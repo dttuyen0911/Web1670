@@ -20,7 +20,7 @@ namespace Web1670.Models
         public int bookQuantity { get; set; }
         public int pubID  { get; set; }
         public int cateID { get; set; }
-        public decimal bookPrice { get; set; }
+        public double bookPrice { get; set; }
         [ForeignKey("pubID")]
         public virtual Publisher? Publisher { get; set; }
         [ForeignKey("cateID")]

@@ -1,9 +1,11 @@
 ﻿using GC02Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Data;
 using Web1670.Models;
 
 namespace Web1670.Controllers
@@ -15,6 +17,7 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Index()
         {
             IEnumerable<Book> books = _dbContext.books.ToList();
@@ -26,18 +29,14 @@ namespace Web1670.Controllers
             var detailBook = books.Where(b => b.bookID == id).FirstOrDefault();
             return View(detailBook);
         }
-        //public IActionResult Search(string name)
-        //{
-        //    IEnumerable<Book> books = _dbContext.books.ToList();
-        //    var search = books.Where(b => b.bookName == name).FirstOrDefault();
-        //    return View(search);
-        //}
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Create()
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View();
         }
+        [Authorize(Roles = "Admin,Owner")]
         [HttpPost]
         public IActionResult Create(Book obj)
         {
@@ -52,6 +51,7 @@ namespace Web1670.Controllers
             }
             return View(obj);
         }
+        [Authorize(Roles = "Admin,Owner")]
         public string UploadFile(Book obj)
         {
             string uniqueFileName = null;
@@ -70,7 +70,7 @@ namespace Web1670.Controllers
             }
             return uniqueFileName;
         }
-
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Edit(int id)
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
@@ -82,6 +82,7 @@ namespace Web1670.Controllers
             }
             return View(obj);
         }
+        [Authorize(Roles = "Admin,Owner")]
         [HttpPost]
         public IActionResult Edit(int id, Book obj, string img)
         {
@@ -115,6 +116,7 @@ namespace Web1670.Controllers
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View(obj);
         }
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Delete(int id, string img)
         {
             Book obj = _dbContext.books.Find(id);

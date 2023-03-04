@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Web1670.Controllers
 {
-
+    [Authorize(Roles = "Admin,Owner")]
     public class OwnerController : Controller
     {
         public IActionResult Index()
