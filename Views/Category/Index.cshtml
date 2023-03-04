@@ -18,8 +18,6 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Address</th>
-                            <th>Telephone</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,8 +27,6 @@
                                 <th>@category.cateID</th>
                                 <th>@category.cateName</th>
                                 <th>@category.cateDescription</th>
-                                <th>@category.cateAddress</th>
-                                <th>@category.cateTelephone</th>
                                 <td>
                                     <a asp-action="Edit" asp-route-id=@category.cateID> Edit</a>
                                     <a asp-action="Delete" asp-route-id=@category.cateID onclick="return confirm('Are you sure');"> Delete</a>

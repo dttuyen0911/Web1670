@@ -33,7 +33,7 @@
                                 <th>@book.bookID</th>
                                 <th>@book.bookName</th>
                                 <th><img src="~/uploads/@book.urlImage" style="width: 100px; height: 100px" /></th>
-                                <th>@book.bookDescription</th>
+                                <th>@book.bookDescription.Substring(0, 20)</th>
                                 <th>@book.bookDate.ToShortDateString()</th>
                                 <th>@book.bookQuantity</th>
                                 <th>@book.bookPrice</th>
