@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230302100209_a2")]
-    partial class a2
+    [Migration("20230304052419_mg4")]
+    partial class mg4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,6 +88,10 @@ namespace Web1670.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -139,6 +143,8 @@ namespace Web1670.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -234,11 +240,10 @@ namespace Web1670.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bookID"), 1L, 1);
 
-                    b.Property<string>("bookDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("bookDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("bookImageName")
+                    b.Property<string>("bookDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -246,17 +251,20 @@ namespace Web1670.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("bookPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("bookPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("bookQuantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("cateID")
+                    b.Property<int>("cateID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("pubID")
+                    b.Property<int>("pubID")
                         .HasColumnType("int");
+
+                    b.Property<string>("urlImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("bookID");
 
@@ -265,6 +273,27 @@ namespace Web1670.Migrations
                     b.HasIndex("pubID");
 
                     b.ToTable("books");
+                });
+
+            modelBuilder.Entity("Web1670.Models.Cart", b =>
+                {
+                    b.Property<int>("cartID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cartID"), 1L, 1);
+
+                    b.Property<int>("bookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("cartQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("cartID");
+
+                    b.HasIndex("bookID");
+
+                    b.ToTable("carts");
                 });
 
             modelBuilder.Entity("Web1670.Models.Category", b =>
@@ -306,6 +335,28 @@ namespace Web1670.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
 
+                    b.Property<string>("cus_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("orderAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("orderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("orderFullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("orderPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("owner_id")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("orderID");
 
                     b.ToTable("orders");
@@ -327,9 +378,6 @@ namespace Web1670.Migrations
                     b.Property<double>("amount")
                         .HasColumnType("float");
 
-                    b.Property<int>("bookID1")
-                        .HasColumnType("int");
-
                     b.Property<double>("price")
                         .HasColumnType("float");
 
@@ -339,8 +387,6 @@ namespace Web1670.Migrations
                     b.HasKey("orderID", "bookID");
 
                     b.HasIndex("bookID");
-
-                    b.HasIndex("bookID1");
 
                     b.ToTable("orderdetails");
                 });
@@ -371,6 +417,21 @@ namespace Web1670.Migrations
                     b.HasKey("pubID");
 
                     b.ToTable("publishers");
+                });
+
+            modelBuilder.Entity("Web1670.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -428,34 +489,49 @@ namespace Web1670.Migrations
                 {
                     b.HasOne("Web1670.Models.Category", "Category")
                         .WithMany("Books")
-                        .HasForeignKey("cateID");
+                        .HasForeignKey("cateID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Web1670.Models.Publisher", "Publisher")
                         .WithMany("Books")
-                        .HasForeignKey("pubID");
+                        .HasForeignKey("pubID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
 
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
+            modelBuilder.Entity("Web1670.Models.Cart", b =>
                 {
-                    b.HasOne("Web1670.Models.Order", "order")
-                        .WithMany("orderdetails")
+                    b.HasOne("Web1670.Models.Book", "book")
+                        .WithMany()
                         .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web1670.Models.Book", "book")
+                    b.Navigation("book");
+                });
+
+            modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
+                {
+                    b.HasOne("Web1670.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("bookID1")
+                        .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("book");
+                    b.HasOne("Web1670.Models.Order", "Order")
+                        .WithMany("orderdetails")
+                        .HasForeignKey("orderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("order");
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Web1670.Models.Category", b =>

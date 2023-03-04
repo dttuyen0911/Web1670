@@ -4,7 +4,7 @@
 
 namespace Web1670.Migrations
 {
-    public partial class MyFirstMigration11 : Migration
+    public partial class Main : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

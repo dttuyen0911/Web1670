@@ -1,7 +1,9 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
+using System.Security.Claims;
 using Web1670.Models;
 
 namespace Web1670.Controllers
@@ -23,6 +25,8 @@ namespace Web1670.Controllers
         public const string CARTKEY = "cart";
         List<Cart> GetCartItems()
         {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
             var session = HttpContext.Session;
             string jsoncart = session.GetString(CARTKEY);
             if (jsoncart != null)
@@ -104,12 +108,6 @@ namespace Web1670.Controllers
             SaveCartSession(cart);
             // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
             return Ok();
-        }
-
-        public IActionResult CheckOut()
-        {
-            // Xử lý khi đặt hàng
-            return View();
         }
 
     }

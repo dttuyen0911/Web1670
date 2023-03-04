@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web1670.Migrations
 {
-    public partial class a2 : Migration
+    public partial class mg4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,9 @@ namespace Web1670.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -70,7 +73,13 @@ namespace Web1670.Migrations
                 {
                     orderID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderTotal = table.Column<double>(type: "float", nullable: false)
+                    orderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    orderPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    orderAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    orderFullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderTotal = table.Column<double>(type: "float", nullable: false),
+                    cus_id = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    owner_id = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,11 +216,12 @@ namespace Web1670.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     bookName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     bookDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    bookImageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    urlImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    bookDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     bookQuantity = table.Column<int>(type: "int", nullable: false),
-                    bookPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    pubID = table.Column<int>(type: "int", nullable: true),
-                    cateID = table.Column<int>(type: "int", nullable: true)
+                    pubID = table.Column<int>(type: "int", nullable: false),
+                    cateID = table.Column<int>(type: "int", nullable: false),
+                    bookPrice = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -220,12 +230,34 @@ namespace Web1670.Migrations
                         name: "FK_books_categories_cateID",
                         column: x => x.cateID,
                         principalTable: "categories",
-                        principalColumn: "cateID");
+                        principalColumn: "cateID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_books_publishers_pubID",
                         column: x => x.pubID,
                         principalTable: "publishers",
-                        principalColumn: "pubID");
+                        principalColumn: "pubID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "carts",
+                columns: table => new
+                {
+                    cartID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    cartQuantity = table.Column<int>(type: "int", nullable: false),
+                    bookID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_carts", x => x.cartID);
+                    table.ForeignKey(
+                        name: "FK_carts_books_bookID",
+                        column: x => x.bookID,
+                        principalTable: "books",
+                        principalColumn: "bookID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -237,21 +269,20 @@ namespace Web1670.Migrations
                     price = table.Column<double>(type: "float", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     amount = table.Column<double>(type: "float", nullable: false),
-                    OrderDetailDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    bookID1 = table.Column<int>(type: "int", nullable: false)
+                    OrderDetailDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_orderdetails", x => new { x.orderID, x.bookID });
                     table.ForeignKey(
-                        name: "FK_orderdetails_books_bookID1",
-                        column: x => x.bookID1,
+                        name: "FK_orderdetails_books_bookID",
+                        column: x => x.bookID,
                         principalTable: "books",
                         principalColumn: "bookID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_orderdetails_orders_bookID",
-                        column: x => x.bookID,
+                        name: "FK_orderdetails_orders_orderID",
+                        column: x => x.orderID,
                         principalTable: "orders",
                         principalColumn: "orderID",
                         onDelete: ReferentialAction.Cascade);
@@ -307,14 +338,14 @@ namespace Web1670.Migrations
                 column: "pubID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderdetails_bookID",
-                table: "orderdetails",
+                name: "IX_carts_bookID",
+                table: "carts",
                 column: "bookID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_orderdetails_bookID1",
+                name: "IX_orderdetails_bookID",
                 table: "orderdetails",
-                column: "bookID1");
+                column: "bookID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -333,6 +364,9 @@ namespace Web1670.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "carts");
 
             migrationBuilder.DropTable(
                 name: "orderdetails");

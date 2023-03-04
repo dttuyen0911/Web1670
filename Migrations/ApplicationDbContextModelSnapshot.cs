@@ -249,8 +249,8 @@ namespace Web1670.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("bookPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("bookPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("bookQuantity")
                         .HasColumnType("int");
@@ -333,6 +333,28 @@ namespace Web1670.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
 
+                    b.Property<string>("cus_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("orderAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("orderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("orderFullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("orderPhone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("owner_id")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("orderID");
 
                     b.ToTable("orders");
@@ -354,9 +376,6 @@ namespace Web1670.Migrations
                     b.Property<double>("amount")
                         .HasColumnType("float");
 
-                    b.Property<int>("bookID1")
-                        .HasColumnType("int");
-
                     b.Property<double>("price")
                         .HasColumnType("float");
 
@@ -366,8 +385,6 @@ namespace Web1670.Migrations
                     b.HasKey("orderID", "bookID");
 
                     b.HasIndex("bookID");
-
-                    b.HasIndex("bookID1");
 
                     b.ToTable("orderdetails");
                 });
@@ -498,21 +515,21 @@ namespace Web1670.Migrations
 
             modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
                 {
-                    b.HasOne("Web1670.Models.Order", "order")
-                        .WithMany("orderdetails")
+                    b.HasOne("Web1670.Models.Book", "Book")
+                        .WithMany()
                         .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web1670.Models.Book", "book")
-                        .WithMany()
-                        .HasForeignKey("bookID1")
+                    b.HasOne("Web1670.Models.Order", "Order")
+                        .WithMany("orderdetails")
+                        .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("book");
+                    b.Navigation("Book");
 
-                    b.Navigation("order");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Web1670.Models.Category", b =>
