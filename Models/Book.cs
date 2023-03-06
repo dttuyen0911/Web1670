@@ -20,11 +20,9 @@ namespace Web1670.Models
         public IFormFile? Image { get; set; }
         public string? urlImage { get; set; }
         public DateTime bookDate { get; set; }
-        [RegularExpression(@"^\d[0-9]$", ErrorMessage = "Quantity is number")]
         public int? bookQuantity { get; set; }
         public int pubID  { get; set; }
         public int cateID { get; set; }
-        [RegularExpression(@"^\d[0-9]$", ErrorMessage = "Quantity is number")]
         public double  bookPrice { get; set; }
         [ForeignKey("pubID")]
         public virtual Publisher? Publisher { get; set; }
