@@ -27,7 +27,7 @@ namespace Web1670.Controllers
         public async Task<IActionResult> Create(Order obj)
         {
             
-            var userID = "abd";
+            var userID = GetID();
             obj.cus_id = userID;
             
             var cart = GetCartItems();
@@ -71,7 +71,7 @@ namespace Web1670.Controllers
         void SaveCartSession(List<Cart> ls)
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var KEY = CARTKEY;
+            var KEY = CARTKEY + userID;
             var session = HttpContext.Session;
             string jsoncart = JsonConvert.SerializeObject(ls);
             session.SetString(KEY, jsoncart);
@@ -87,6 +87,13 @@ namespace Web1670.Controllers
                 return JsonConvert.DeserializeObject<List<Cart>>(jsoncart);
             }
             return new List<Cart>();
+        }
+
+        public string GetID()
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var KEY = CARTKEY + userID.ToString();
+            return KEY;
         }
     }
 }
