@@ -57,10 +57,8 @@ namespace Web1670.Migrations
                 {
                     cateID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cateName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cateDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cateAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cateTelephone = table.Column<int>(type: "int", nullable: false)
+                    cateName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    cateDescription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,9 +90,9 @@ namespace Web1670.Migrations
                 {
                     pubID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    pubName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    pubDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    pubAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    pubName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    pubDescription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    pubAddress = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     pubTelephone = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -214,7 +212,7 @@ namespace Web1670.Migrations
                 {
                     bookID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    bookName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    bookName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     bookDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     urlImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     bookDate = table.Column<DateTime>(type: "datetime2", nullable: false),

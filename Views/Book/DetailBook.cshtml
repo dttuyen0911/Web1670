@@ -11,15 +11,15 @@
             <div id="" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner border">
                     <div class="carousel-item active">
-                        <img src="~/uploads/@Model.urlImage" style="width: 300px; height: 200px" />
+                        <img src="~/uploads/@Model.urlImage" style="width: 350px; height: 400px" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold">Name: @Model.bookName</h3>
-            <h3 class="font-weight-semi-bold mb-4">Price: @Model.bookPrice</h3>
-            <p class="mb-4">Description: @Model.bookDescription</p>
+            <h3 class="font-weight-semi-bold mb-4">Price: @Model.bookPrice.000VND</h3>
+            <p class="mb-4" style="text-align: justify">Description: @Model.bookDescription</p>
             <p class="mb-4">Date: @Model.bookDate.ToShortDateString()</p>
             <p class="mb-4">Quantity: @Model.bookQuantity</p>
             <a asp-controller="Book" asp-action="AddToCart" asp-route-id="@Model.bookID" button class="btn btn-warning">Add To Cart</a>
