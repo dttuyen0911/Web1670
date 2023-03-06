@@ -253,7 +253,7 @@ namespace Web1670.Migrations
                     b.Property<double>("bookPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("bookQuantity")
+                    b.Property<int?>("bookQuantity")
                         .HasColumnType("int");
 
                     b.Property<int>("cateID")
@@ -410,8 +410,9 @@ namespace Web1670.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("pubTelephone")
-                        .HasColumnType("int");
+                    b.Property<string>("pubTelephone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("pubID");
 

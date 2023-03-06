@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230304093730_v1")]
-    partial class v1
+    [Migration("20230306144909_dtt1")]
+    partial class dtt1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,12 +249,13 @@ namespace Web1670.Migrations
 
                     b.Property<string>("bookName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<double>("bookPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("bookQuantity")
+                    b.Property<int?>("bookQuantity")
                         .HasColumnType("int");
 
                     b.Property<int>("cateID")
@@ -304,20 +305,15 @@ namespace Web1670.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cateID"), 1L, 1);
 
-                    b.Property<string>("cateAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("cateDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("cateName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("cateTelephone")
-                        .HasColumnType("int");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("cateID");
 
@@ -341,14 +337,16 @@ namespace Web1670.Migrations
 
                     b.Property<string>("orderAddress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("orderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("orderFullname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("orderPhone")
                         .IsRequired()
@@ -401,18 +399,22 @@ namespace Web1670.Migrations
 
                     b.Property<string>("pubAddress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("pubDescription")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("pubName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
-                    b.Property<int>("pubTelephone")
-                        .HasColumnType("int");
+                    b.Property<string>("pubTelephone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("pubID");
 

@@ -4,7 +4,7 @@
 
 namespace Web1670.Migrations
 {
-    public partial class m9 : Migration
+    public partial class dtt2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

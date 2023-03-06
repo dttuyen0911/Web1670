@@ -93,16 +93,19 @@ namespace Web1670.Controllers
         {
             var cart = GetCartItems();
             var cartitem = cart.Find(p => p.book.bookID == id);
-            if(quanty < 0)
+            if(cartitem != null)
             {
-                return RedirectToAction(nameof(Cart));
+                if(quanty < 0)
+                {
+                    return RedirectToAction(nameof(Cart));
+                }
+                else
+                {
+                    cartitem.cartQuantity = quanty;
+                }
             }
-            else
-            {
-                cartitem.cartQuantity = quanty;
-            }
+            SaveCartSession(cart);
             return Ok();
         }
-
     }
 }

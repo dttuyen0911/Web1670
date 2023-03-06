@@ -49,6 +49,8 @@ namespace Web1670.Controllers
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
+            ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View(obj);
         }
         [Authorize(Roles = "Admin,Owner")]
