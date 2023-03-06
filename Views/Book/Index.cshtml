@@ -6,48 +6,76 @@
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
 
-<div class="container-fluid pt-4 px-4">
-    <a class=" btn btn-primary" asp-controller="Book" asp-action="Create">Add book</a>
-        <div class="row g-4">
-             <div class="col-sm-12 col-xl-12">
-                  <div class="bg-light rounded h-100 p-4">
-                      <h6 class="mb-4">Book Table</h6>
-                          <table class="table">
-                          <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Description</th>
-                            <th>Datetime</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Publisher</th>
-                            <th>Category</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                            @foreach (var book in Model)
-                            {
-                            <tr>
-                                <th>@book.bookID</th>
-                                <th>@book.bookName</th>
-                                <th><img src="~/uploads/@book.urlImage" style="width: 100px; height: 100px" /></th>
-                                <th>@book.bookDescription</th>
-                                <th>@book.bookDate.ToShortDateString()</th>
-                                <th>@book.bookQuantity</th>
-                                <th>@book.bookPrice</th>
-                                <th>@book.pubID</th>
-                                <th>@book.cateID</th>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id=@book.bookID asp-route-img="@book.Image"> Edit</a>
-                                    <a asp-action="Delete" asp-route-id=@book.bookID asp-route-img="@book.urlImage" onclick="return confirm('Are You Sure?');"> Delete</a>
-                                </td>
-                            </tr>
-                            }
-                          </tbody>
-                          </table>
-                  </div>
-             </div>
+<div class="container-fluid">
+    <p class="mb-4">
+        <a class=" btn btn-primary" asp-controller="Book" asp-action="Create">Add Book</a>
+    </p>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Book Table</h6>
         </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTable_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ID: activate to sort column descending" style="width: 62.3333px;" aria-sort="ascending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 72.3333px;">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Image: activate to sort column ascending" style="width: 52.3333px;">Image</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Description: activate to sort column ascending" style="width: 72.3333px;">Description</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Datetime: activate to sort column ascending" style="width: 52.3333px;">Datetime</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Quantity: activate to sort column ascending" style="width: 52.3333px;">Quantity</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 72.3333px;">Price</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 52.3333px;">Category</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Publisher: activate to sort column ascending" style="width: 52.3333px;">Publisher</th>
+                                        <th></th>
+                                    </tr>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">ID</th>
+                                        <th rowspan="1" colspan="1">Name</th>
+                                        <th rowspan="1" colspan="1">Image</th>
+                                        <th rowspan="1" colspan="1">Description</th>
+                                        <th rowspan="1" colspan="1">Datetime</th>
+                                        <th rowspan="1" colspan="1">Image</th>
+                                        <th rowspan="1" colspan="1">Quantity</th>
+                                        <th rowspan="1" colspan="1">Price</th>
+                                        <th rowspan="1" colspan="1">Category</th>
+                                        <th rowspan="1" colspan="1">Pulishe</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var book in Model)
+                                    {
+                                        <tr>
+                                            <th>@book.bookID</th>
+                                            <th>@book.bookName</th>
+                                            <th><img src="~/uploads/@book.urlImage" style="width: 100px; height: 100px" /></th>
+                                            <th>@book.bookDescription</th>
+                                            <th>@book.bookDate.ToShortDateString()</th>
+                                            <th>@book.bookQuantity</th>
+                                            <th>@book.bookPrice</th>
+                                            <th>@book.pubID</th>
+                                            <th>@book.cateID</th>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id=@book.bookID asp-route-img="@book.Image"> Edit</a>
+                                                <a asp-action="Delete" asp-route-id=@book.bookID asp-route-img="@book.urlImage" onclick="return confirm('Are You Sure?');"> Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
