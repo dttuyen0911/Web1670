@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web1670.Migrations
 {
-    public partial class Main : Migration
+    public partial class NewUserRegistrationCols : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
