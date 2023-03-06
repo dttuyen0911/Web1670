@@ -39,34 +39,30 @@ namespace Web1670.Controllers
             or.orderAddress = obj.orderAddress;
             or.orderFullname = obj.orderFullname;
             or.orderdetails = new List<OrderDetail>();
-            foreach (var item in cart)
-            {
-               
-                OrderDetail od = new OrderDetail();
-                od.bookID = item.book.bookID;
-                od.quantity = item.cartQuantity;
-                od.price += item.cartQuantity * item.book.bookPrice;
-                or.OrderTotal += od.price;
-                od.orderID = or.orderID;
-                od.amount = od.price * od.quantity;
-                or.orderdetails.Add(od);
-                //string data = JsonSerializer.Serialize<Order>(or);
+            if (cart != null) {
+                foreach (var item in cart)
+                {
+                    OrderDetail od = new OrderDetail();
+                    od.bookID = item.book.bookID;
+                    od.quantity = item.cartQuantity;
+                    od.price += item.cartQuantity * item.book.bookPrice;
+                    or.OrderTotal += od.price;
+                    od.orderID = or.orderID;
+                    od.amount = od.price * od.quantity;
+                    or.orderdetails.Add(od);
+                    //string data = JsonSerializer.Serialize<Order>(or);
+                }
             }
-
              _dbContext.orders.Add(or);
-                _dbContext.SaveChanges();
-            ClearCart();
-               return RedirectToAction("Index", "Order");
-            return View();
+             _dbContext.SaveChanges();
+             ClearCart();
+             return RedirectToAction("Index", "Order");
         }
         void ClearCart()
         {
-
-            List<Cart> cart = GetCartItems();
-            
+            List<Cart> cart = GetCartItems();   
             cart.Clear();
             SaveCartSession(cart);
-
         }
         void SaveCartSession(List<Cart> ls)
         {
