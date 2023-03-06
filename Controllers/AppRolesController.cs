@@ -5,16 +5,14 @@ using System.Configuration;
 
 namespace Web1670.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
-
         public AppRolesController(RoleManager<IdentityRole> roleManager)
         {
             _roleManager = roleManager;
         }
-
         public IActionResult Index()
         {
             var roles = _roleManager.Roles;
@@ -25,7 +23,6 @@ namespace Web1670.Controllers
         {
             return View();  
         }
-
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model)
         {
@@ -33,7 +30,6 @@ namespace Web1670.Controllers
             {
                 _roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
             }
-
             return RedirectToAction("Index");
         }
     }
