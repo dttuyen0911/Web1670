@@ -1,0 +1,55 @@
+﻿@using Web1670.Models
+
+@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="main-wrapper"
+     data-layout="vertical"
+     data-navbarbg="skin5"
+     data-sidebartype="full"
+     data-sidebar-position="absolute"
+     data-header-position="absolute"
+     data-boxed-layout="full">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">Order Table</h5>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Order Date</th>
+                                    <th>Telephone</th>
+                                    <th>Address</th>
+                                    <th>FullName</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in Model)
+                                {
+                                    <tr>
+                                        <th>@order.orderID</th>
+                                        <th>@order.orderDate</th>
+                                        <th>@order.orderPhone</th>
+                                        <th>@order.orderAddress</th>
+                                        <th>@order.orderFullname</th>
+                                        <th>@order.OrderTotal</th>
+                                        <th> <a asp-controller="OrderDetail" asp-route-id=@order.orderID asp-action="Index" class="btn btn-primary">View Order Detail</a></th>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

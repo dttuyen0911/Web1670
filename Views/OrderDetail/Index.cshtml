@@ -1,0 +1,37 @@
+﻿@using Web1670.Models
+@model IEnumerable<OrderDetail>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card-body">
+    <h5 class="card-title mb-0">Order Table</h5>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Book ID</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Order Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var orderdetail in Model)
+        {
+            <tr>
+                <th>@orderdetail.orderID</th>
+                <th>@orderdetail.bookID</th>
+                <th>@orderdetail.price</th>
+                <th>@orderdetail.quantity</th>
+                <th>@orderdetail.amount</th>
+                <th>@orderdetail.OrderDetailDate</th> 
+            </tr>
+            <a asp-controller="Order" asp-action="DisplayOrder" class="btn btn-primary">Back to Order</a>
+        }
+    </tbody>
+</table>
+                
