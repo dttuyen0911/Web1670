@@ -19,7 +19,6 @@ namespace Web1670.Controllers
         }
         public IActionResult Index()
         {
-
             return View();
         }
 

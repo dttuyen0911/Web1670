@@ -9,7 +9,6 @@ namespace Web1670.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         public int bookID { get; set; }
         [Required(ErrorMessage = "Name of book is not null")]
         [RegularExpression(@"^[a-zA-Z\s\W]+$", ErrorMessage = "Name must be character")]
@@ -21,14 +20,10 @@ namespace Web1670.Models
         public IFormFile? Image { get; set; }
         public string? urlImage { get; set; }
         public DateTime bookDate { get; set; }
-        [Required(ErrorMessage = "Quantity of book is not null")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Quantity must be number")]
-        public int bookQuantity { get; set; }
+        public int? bookQuantity { get; set; }
         public int pubID  { get; set; }
         public int cateID { get; set; }
-        [Required(ErrorMessage = "Price of book is not null")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Price must be number")]
-        public double bookPrice { get; set; }
+        public double  bookPrice { get; set; }
         [ForeignKey("pubID")]
         public virtual Publisher? Publisher { get; set; }
         [ForeignKey("cateID")]

@@ -49,20 +49,19 @@ namespace Web1670.Controllers
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewData["pubID"] = new SelectList(_dbContext.publishers.ToList(), "pubID", "pubName");
+            ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
             return View(obj);
         }
         [Authorize(Roles = "Admin,Owner")]
         public string UploadFile(Book obj)
         {
             string uniqueFileName = null;
-
             if (obj.Image != null)
             {
                 string uploadsFoder = Path.Combine("wwwroot", "uploads");
-                // name file
                 uniqueFileName = Guid.NewGuid().ToString() + obj.bookID + obj.Image.FileName;
                 string filePath = Path.Combine(uploadsFoder, uniqueFileName);
-                // copy ve code
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     obj.Image.CopyTo(fileStream);
@@ -86,7 +85,6 @@ namespace Web1670.Controllers
         [HttpPost]
         public IActionResult Edit(int id, Book obj, string img)
         {
-
             if (ModelState.IsValid)
             {
                 if (obj.Image == null)
@@ -109,8 +107,7 @@ namespace Web1670.Controllers
                         System.IO.File.Delete(img);
                         infor.Delete();
                     }
-                }
-                return RedirectToAction("Index");
+                }return RedirectToAction("Index");
             }
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
@@ -145,7 +142,6 @@ namespace Web1670.Controllers
                     _dbContext.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                
             }
         }
     }

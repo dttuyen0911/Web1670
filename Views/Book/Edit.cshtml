@@ -17,7 +17,7 @@
                 </div>
                 </br>
                 <div>
-                    Description:<input type="text" asp-for="bookDescription" />
+                    Description:<input type="text" asp-for="bookDescription" /><span asp-validation-for="bookDescription"></span>
                 </div>
                 </br>
                 <div>
@@ -25,11 +25,11 @@
                 </div>
                 </br>
                 <div>
-                    Quantity:<input type="text" asp-for="bookQuantity" />
+                    Quantity:<input type="number" asp-for="bookQuantity" min="1"/><span asp-validation-for="bookQuantity"></span>
                 </div>
                 </br>
                 <div>
-                    Price:<input type="text" asp-for="bookPrice" />
+                    Price:<input type="number" asp-for="bookPrice" min="1" /><span asp-validation-for="bookPrice"></span>
                 </div>
                 </br>
                 <div class="form-group">
