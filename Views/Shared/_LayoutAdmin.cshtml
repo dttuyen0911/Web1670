@@ -15,6 +15,15 @@
     <!-- Custom styles for this template-->
     <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="~/form/assets/images/favicon.png" 
+     >
+    <link href="~/form/assets/libs/jquery-steps/jquery.steps.css"
+          rel="stylesheet" />
+    <link href="~/form/assets/libs/jquery-steps/steps.css" rel="stylesheet" />
+    <link href="~/form/dist/css/style.min.css" rel="stylesheet" />
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -114,6 +123,48 @@
 
     <!-- Page level custom scripts -->
     <script src="~/admin/js/demo/datatables-demo.js"></script>
+    <script src="~/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admin/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/admin/assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="~/admin/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/admin/dist/js/custom.min.js"></script>
+    <!-- this page js -->
+    <script src="~/admin/assets/libs/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="~/admin/assets/libs/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script>
+        // Basic Example with form
+        var form = $("#example-form");
+        form.validate({
+            errorPlacement: function errorPlacement(error, element) {
+                element.before(error);
+            },
+            rules: {
+                confirm: {
+                    equalTo: "#password",
+                },
+            },
+        });
+        form.children("div").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            onStepChanging: function (event, currentIndex, newIndex) {
+                form.validate().settings.ignore = ":disabled,:hidden";
+                return form.valid();
+            },
+            onFinishing: function (event, currentIndex) {
+                form.validate().settings.ignore = ":disabled";
+                return form.valid();
+            },
+            onFinished: function (event, currentIndex) {
+                alert("Submitted!");
+            },
+        });
+    </script>
 </body>
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
