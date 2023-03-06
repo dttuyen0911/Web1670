@@ -21,13 +21,13 @@
                     <form asp-controller="Publisher" asp-action="Create" method="post">
                         <div>
                             <section>
-                                <label asp-for="pubName">Name</label>
+                                <label asp-for="pubName">Name</label> <span asp-validation-for="pubName"></span>
                                 <input type="text" asp-for="pubName" class="form-control" aria-required="true" />
-                                <label asp-for="pubDescription">Description</label>
+                                <label asp-for="pubDescription">Description</label> <span asp-validation-for="pubDescription"></span>
                                 <input type="text" asp-for="pubDescription" class="form-control" aria-required="true" />
-                                <label asp-for="pubAddress">Address</label>
+                                <label asp-for="pubAddress">Address</label> <span asp-validation-for="pubAddress"></span>
                                 <input type="text" asp-for="pubAddress" class="form-control" aria-required="true" />
-                                <label asp-for="pubTelephone">Telephone</label>
+                                <label asp-for="pubTelephone">Telephone</label> <span asp-validation-for="pubTelephone"></span>
                                 <input type="text" asp-for="pubTelephone" class="form-control" aria-required="true" />
                             </section>
                         </div>

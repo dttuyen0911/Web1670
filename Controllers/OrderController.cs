@@ -25,7 +25,6 @@ namespace Web1670.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Order obj)
         {
-            
             var userID = GetID();
             obj.cus_id = userID;
             
