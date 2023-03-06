@@ -335,16 +335,16 @@ namespace Web1670.Migrations
 
                     b.Property<string>("orderAddress")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("orderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("orderFullname")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+
+                        .HasColumnType("nvarchar(max)");
+
 
                     b.Property<string>("orderPhone")
                         .IsRequired()

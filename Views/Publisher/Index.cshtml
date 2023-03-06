@@ -6,43 +6,62 @@
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
 
-<div class="container-fluid pt-4 px-4">
-    <a class=" btn btn-primary" asp-controller="Publisher" asp-action="Create">Add Publisher</a>
-    <div class="row g-4">
-        <div class="col-sm-12 col-xl-12">
-            <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Publisher Table</h6>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Address</th>
-                            <th>Telephone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var publisher in Model)
-                        {
-                            <tr>
-                                <th>@publisher.pubID</th>
-                                <th>@publisher.pubName</th>
-                                <th>@publisher.pubDescription</th>
-                                <th>@publisher.pubAddress</th>
-                                <th>@publisher.pubTelephone</th>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id=@publisher.pubID> Edit</a>
-                                    <a asp-action="Delete" asp-route-id=@publisher.pubID onclick="return confirm('Are you sure');"> Delete</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+<div class="container-fluid">
+    <p class="mb-4">
+        <a class=" btn btn-primary" asp-controller="Publisher" asp-action="Create">Add Publisher</a>
+    </p>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Publisher Table</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTable_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ID: activate to sort column descending" style="width: 62.3333px;" aria-sort="ascending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 72.3333px;">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Description: activate to sort column ascending" style="width: 52.3333px;">Description</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending" style="width: 30.3333px;">Address</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Telephone: activate to sort column ascending" style="width: 69.3333px;">Telephone</th>
+                                        <th></th>
+                                    </tr>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">ID</th>
+                                        <th rowspan="1" colspan="1">Name</th>
+                                        <th rowspan="1" colspan="1">Description</th>
+                                        <th rowspan="1" colspan="1">Address</th>
+                                        <th rowspan="1" colspan="1">Telephone</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach (var publisher in Model)
+                                    {
+                                        <tr>
+                                            <th>@publisher.pubID</th>
+                                            <th>@publisher.pubName</th>
+                                            <th>@publisher.pubDescription</th>
+                                            <th>@publisher.pubAddress</th>
+                                            <th>@publisher.pubTelephone</th>
+                                            <td>
+                                                <a asp-action="Edit" asp-route-id=@publisher.pubID> Edit</a>
+                                                <a asp-action="Delete" asp-route-id=@publisher.pubID onclick="return confirm('Are you sure');"> Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-

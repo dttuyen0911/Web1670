@@ -4,27 +4,35 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
-<form asp-controller="Category" asp-action="Create" method="post">
-    <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Create Category</span></h2>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <div>
-                    Name: <input type="text" asp-for="cateName" /><span asp-validation-for="cateName"></span>
+
+<div id="main-wrapper"
+     data-layout="vertical"
+     data-navbarbg="skin5"
+     data-sidebartype="full"
+     data-sidebar-position="absolute"
+     data-header-position="absolute"
+     data-boxed-layout="full">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body wizard-content">
+                    <h4 class="card-title">Category Form</h4>
+                    <h6 class="card-subtitle"></h6>
+                    <form asp-controller="Category" asp-action="Create" method="post">
+                        <div>
+                            <section>
+                                <label asp-for="cateName">Name</label>
+                                <input type="text" asp-for="cateName" class="form-control" aria-required="true" />
+                                <label asp-for="cateDescription">Description</label>
+                                <input type="text" asp-for="cateDescription" class="form-control" aria-required="true"/>
+                            </section>
+                        </div>
+                        </br>
+                        <input type="submit" value="Submit" />
+                        <a asp-action="Index"> Back to list</a>
+                    </form>
                 </div>
-                </br>
-                <div>
-                    Description: <input type="text" asp-for="cateDescription" /><span asp-validation-for="cateDescription"></span>
-                </div>
-                </br>
-                <input type="submit" value="Submit" />
-                <a asp-action="Index"> Back to list</a>
-            </form>
+            </div>
         </div>
     </div>
-</form>
-@*@section scripts{
-    <partial name="_ValidationScriptsPartial" />
-}*@
+</div>

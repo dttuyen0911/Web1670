@@ -5,20 +5,31 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<form asp-controller="AppRoles" asp-action="Create" method="post">
-    <div class="row">
-        <div class=" col-md-4">
-            <form method="post">
-                <h2>Create Role</h2>
-                <hr />
-                <div asp-asp-validation-summary="ModeOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Name" class="form-control" aria-required="true" />
-                    <label asp-for="Name"></label>
-                    <span asp-validation-for="Name" class="test-danger"></span>
+<div id="main-wrapper"
+     data-layout="vertical"
+     data-navbarbg="skin5"
+     data-sidebartype="full"
+     data-sidebar-position="absolute"
+     data-header-position="absolute"
+     data-boxed-layout="full">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body wizard-content">
+                    <h4 class="card-title">Role Form</h4>
+                    <h6 class="card-subtitle"></h6>
+                    <form asp-controller="AppRoles" asp-action="Create" method="post">
+                        <div>
+                            <section>                          
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control" aria-required="true" />
+                            </section>
+                        </div>
+                        </br>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form>
+            </div>
         </div>
     </div>
-</form>
+</div>

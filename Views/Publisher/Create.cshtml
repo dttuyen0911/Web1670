@@ -4,35 +4,39 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
-<form asp-controller="Publisher" asp-action="Create" method="post">
-    <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Create Publisher</span></h2>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <form>
-                <div>
-                    Name: <input type="text" asp-for="pubName" /><span asp-validation-for="pubName"></span>
+
+<div id="main-wrapper"
+     data-layout="vertical"
+     data-navbarbg="skin5"
+     data-sidebartype="full"
+     data-sidebar-position="absolute"
+     data-header-position="absolute"
+     data-boxed-layout="full">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body wizard-content">
+                    <h4 class="card-title">Publisher Form</h4>
+                    <h6 class="card-subtitle"></h6>
+                    <form asp-controller="Publisher" asp-action="Create" method="post">
+                        <div>
+                            <section>
+                                <label asp-for="pubName">Name</label>
+                                <input type="text" asp-for="pubName" class="form-control" aria-required="true" />
+                                <label asp-for="pubDescription">Description</label>
+                                <input type="text" asp-for="pubDescription" class="form-control" aria-required="true" />
+                                <label asp-for="pubAddress">Address</label>
+                                <input type="text" asp-for="pubAddress" class="form-control" aria-required="true" />
+                                <label asp-for="pubTelephone">Telephone</label>
+                                <input type="text" asp-for="pubTelephone" class="form-control" aria-required="true" />
+                            </section>
+                        </div>
+                        </br>
+                        <input type="submit" value="Submit" />
+                        <a asp-action="Index"> Back to list</a>
+                    </form>
                 </div>
-                </br>
-                <div>
-                    Description: <input type="text" asp-for="pubDescription" /><span asp-validation-for="pubDescription"></span>
-                </div>
-                </br>
-                <div>
-                    Address: <input type="text" asp-for="pubAddress" /><span asp-validation-for="pubAddress"></span>
-                </div>
-                </br>
-                <div>
-                    Telephone: <input type="text" asp-for="pubTelephone" /><span asp-validation-for="pubTelephone"></span>
-                </div>
-                </br>   
-                <input type="submit" value="Submit" />
-                <a asp-action="Index"> Back to list</a>
-            </form>
+            </div>
         </div>
     </div>
-</form>
-@*@section scripts{
-    <partial name="_ValidationScriptsPartial" />
-}*@
+</div>
