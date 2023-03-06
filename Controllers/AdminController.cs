@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web1670.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        public AdminController(ApplicationDbContext dbContext, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> serManager)
+        public AdminController(ApplicationDbContext dbContext, SignInManager<IdentityUser> signInManager, 
+            UserManager<IdentityUser> serManager)
         {
             
             _dbContext = dbContext;

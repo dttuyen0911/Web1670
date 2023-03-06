@@ -4,6 +4,7 @@ using GC02Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Web1670.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230305142724_v5")]
+    partial class v5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,11 +249,10 @@ namespace Web1670.Migrations
 
                     b.Property<string>("bookName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("bookPrice")
-                        .HasColumnType("float");
+                    b.Property<decimal>("bookPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("bookQuantity")
                         .HasColumnType("int");
@@ -303,15 +304,20 @@ namespace Web1670.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cateID"), 1L, 1);
 
+                    b.Property<string>("cateAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("cateDescription")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("cateName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("cateTelephone")
+                        .HasColumnType("int");
 
                     b.HasKey("cateID");
 
@@ -328,30 +334,6 @@ namespace Web1670.Migrations
 
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
-
-                    b.Property<string>("cus_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("orderAddress")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTime>("orderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("orderFullname")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("orderPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("owner_id")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("orderID");
 
@@ -374,6 +356,9 @@ namespace Web1670.Migrations
                     b.Property<double>("amount")
                         .HasColumnType("float");
 
+                    b.Property<int>("bookID1")
+                        .HasColumnType("int");
+
                     b.Property<double>("price")
                         .HasColumnType("float");
 
@@ -383,6 +368,8 @@ namespace Web1670.Migrations
                     b.HasKey("orderID", "bookID");
 
                     b.HasIndex("bookID");
+
+                    b.HasIndex("bookID1");
 
                     b.ToTable("orderdetails");
                 });
@@ -397,18 +384,15 @@ namespace Web1670.Migrations
 
                     b.Property<string>("pubAddress")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("pubDescription")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("pubName")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("pubTelephone")
                         .HasColumnType("int");
@@ -516,21 +500,21 @@ namespace Web1670.Migrations
 
             modelBuilder.Entity("Web1670.Models.OrderDetail", b =>
                 {
-                    b.HasOne("Web1670.Models.Book", "Book")
-                        .WithMany()
+                    b.HasOne("Web1670.Models.Order", "order")
+                        .WithMany("orderdetails")
                         .HasForeignKey("bookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Web1670.Models.Order", "Order")
-                        .WithMany("orderdetails")
-                        .HasForeignKey("orderID")
+                    b.HasOne("Web1670.Models.Book", "book")
+                        .WithMany()
+                        .HasForeignKey("bookID1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Book");
+                    b.Navigation("book");
 
-                    b.Navigation("Order");
+                    b.Navigation("order");
                 });
 
             modelBuilder.Entity("Web1670.Models.Category", b =>

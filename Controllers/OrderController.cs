@@ -19,7 +19,6 @@ namespace Web1670.Controllers
         }
         public IActionResult Index()
         {
-
             return View();
         }
 
@@ -61,12 +60,9 @@ namespace Web1670.Controllers
         }
         void ClearCart()
         {
-
             List<Cart> cart = GetCartItems();
-            
             cart.Clear();
             SaveCartSession(cart);
-
         }
         void SaveCartSession(List<Cart> ls)
         {

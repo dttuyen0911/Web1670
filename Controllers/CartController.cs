@@ -41,7 +41,6 @@ namespace Web1670.Controllers
             var session = HttpContext.Session;
             session.Remove(CARTKEY);
         }
-        // Lưu Cart (Danh sách CartItem) vào session
         void SaveCartSession(List<Cart> ls)
         {
             var session = HttpContext.Session;
@@ -59,18 +58,13 @@ namespace Web1670.Controllers
             var cartitem = cart.Find(p => p.book.bookID == id);
             if (cartitem != null)
             {
-                // Đã tồn tại, tăng thêm 1
                 cartitem.cartQuantity++;
             }
             else
             {
-                //  Thêm mới
                 cart.Add(new Cart() { cartQuantity = 1, book = book });
             }
-
-            // Lưu cart vào Session
             SaveCartSession(cart);
-            // Chuyển đến trang hiện thị Cart
             return RedirectToAction(nameof(Cart));
         }
 
@@ -86,7 +80,6 @@ namespace Web1670.Controllers
             var cartitem = cart.Find(p => p.book.bookID == id);
             if (cartitem != null)
             {
-                // Đã tồn tại, tăng thêm 1
                 cart.Remove(cartitem);
             }
 
@@ -100,13 +93,14 @@ namespace Web1670.Controllers
         {
             var cart = GetCartItems();
             var cartitem = cart.Find(p => p.book.bookID == id);
-            if (cartitem != null)
+            if(quanty < 0)
             {
-                // Đã tồn tại, tăng thêm 1
+                return RedirectToAction(nameof(Cart));
+            }
+            else
+            {
                 cartitem.cartQuantity = quanty;
             }
-            SaveCartSession(cart);
-            // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
             return Ok();
         }
 
