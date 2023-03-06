@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Drawing;
 using System.Globalization;
+using System.Net.WebSockets;
 using System.Security.Claims;
 using Web1670.Models;
 
@@ -19,8 +20,20 @@ namespace Web1670.Controllers
         }
         public IActionResult Index()
         {
-
             return View();
+        }
+        public IActionResult DisplayOrder(Order obj) 
+
+        {
+            var userID = GetID();
+            List<Order> orders = _dbContext.orders.Where(o => o.cus_id == userID).ToList();
+            return View(orders);
+        }
+
+        public IActionResult Detail(Order obj) 
+        {
+            List<Order> order = _dbContext.orders.ToList();
+            return View(order);
         }
 
         [HttpPost]
@@ -56,7 +69,7 @@ namespace Web1670.Controllers
              _dbContext.orders.Add(or);
              _dbContext.SaveChanges();
              ClearCart();
-             return RedirectToAction("Index", "Order");
+             return RedirectToAction("DisplayOrder");
         }
         void ClearCart()
         {
@@ -88,7 +101,7 @@ namespace Web1670.Controllers
         public string GetID()
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var KEY = CARTKEY + userID.ToString();
+            var KEY = userID.ToString();
             return KEY;
         }
     }
