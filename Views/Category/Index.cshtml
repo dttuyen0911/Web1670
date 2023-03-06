@@ -1,6 +1,6 @@
 ﻿@using Web1670.Models
 
-@model IEnumerable<Publisher>
+@model IEnumerable<Category>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
@@ -8,11 +8,11 @@
 
 <div class="container-fluid">
     <p class="mb-4">
-        <a class=" btn btn-primary" asp-controller="Publisher" asp-action="Create">Add Publisher</a>
+        <a class=" btn btn-primary" asp-controller="Category" asp-action="Create">Add Category</a>
     </p>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Publisher Table</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Category Table</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -25,8 +25,6 @@
                                         <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 62.3333px;" aria-sort="ascending">ID</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 72.3333px;">Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 52.3333px;">Description</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 30.3333px;">Address</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 69.3333px;">Telephone</th>
                                         <th></th>
                                     </tr>
                                     </tr>
@@ -37,23 +35,20 @@
                                         <th rowspan="1" colspan="1">ID</th>
                                         <th rowspan="1" colspan="1">Name</th>
                                         <th rowspan="1" colspan="1">Description</th>
-                                        <th rowspan="1" colspan="1">Address</th>
-                                        <th rowspan="1" colspan="1">Telephone</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @foreach (var publisher in Model)
+                                    @foreach (var category in Model)
                                     {
                                         <tr>
-                                            <th>@publisher.pubID</th>
-                                            <th>@publisher.pubName</th>
-                                            <th>@publisher.pubDescription</th>
-                                            <th>@publisher.pubAddress</th>
-                                            <th>@publisher.pubTelephone</th>
+                                            <th>@category.cateID</th>
+                                            <th>@category.cateName</th>
+                                            <th>@category.cateDescription</th>
                                             <td>
-                                                <a asp-action="Edit" asp-route-id=@publisher.pubID> Edit</a>
-                                                <a asp-action="Delete" asp-route-id=@publisher.pubID onclick="return confirm('Are you sure');"> Delete</a>
+                                                <a asp-action="Edit" asp-route-id=@category.cateID> Edit</a>
+                                                <a asp-action="Delete" asp-route-id=@category.cateID onclick="return confirm('Are you sure');"> Delete</a>
                                             </td>
+
                                         </tr>
                                     }
                                 </tbody>
@@ -65,3 +60,6 @@
         </div>
     </div>
 </div>
+
+
+

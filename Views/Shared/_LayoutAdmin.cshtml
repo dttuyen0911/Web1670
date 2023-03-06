@@ -14,6 +14,7 @@
           rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -21,7 +22,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a asp-controller="Admin" asp-action="Index" class="sidebar-brand d-flex align-items-center justify-content-center">
+            <a asp-controller="Owner" asp-action="Index" class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -95,36 +96,24 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <div class="container">
-                        <main role="main" class="pb-3">
-                            @RenderBody()
-                        </main>
-                    </div>
-                </div>
-                <!-- /.container-fluid -->
-                <!-- End of Main Content -->
-                <!-- Footer -->
-
+                @RenderBody()
             </div>
-            <!-- End of Footer --
-            <!-- Bootstrap core JavaScript-->
-            <script src="~/admin/vendor/jquery/jquery.min.js"></script>
-            <script src="~/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <!-- Core plugin JavaScript-->
-            <script src="~/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-            <!-- Custom scripts for all pages-->
-            <script src="~/admin/js/sb-admin-2.min.js"></script>
-            <!-- Page level plugins -->
-            <script src="~/admin/vendor/chart.js/Chart.min.js"></script>
-            <!-- Page level custom scripts -->
-            <script src="~/admin/js/demo/chart-area-demo.js"></script>
-            <script src="~/admin/js/demo/chart-pie-demo.js"></script>
         </div>
     </div>
+    <!-- End of Footer --
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/admin/js/sb-admin-2.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="~/admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/admin/js/demo/datatables-demo.js"></script>
 </body>
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">

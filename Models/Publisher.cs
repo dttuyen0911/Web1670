@@ -18,7 +18,7 @@ namespace Web1670.Models
         [Required(ErrorMessage = "Address of publisher is not null")]
         [StringLength(255, ErrorMessage = "String length no more than 255 characters")]
         public string pubAddress { get; set; }
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone numbers that only accept 10 numbers are allowed")]
+        //[RegularExpression(@"^\d{10}$", ErrorMessage = "Phone numbers that only accept 10 numbers are allowed")]
         public int pubTelephone { get; set; }
         public virtual ICollection<Book>? Books { get; set; }
     }
