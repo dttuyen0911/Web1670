@@ -1,75 +1,45 @@
-﻿@using Web1670.Models
+@using Web1670.Models
 @model Order
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<form method="post" asp-action="Create">
-    <div class="text-center mb-4">
-        <h2 class="section-title px-5"><span class="px-2">Create Order</span></h2>
-    </div>
-    <div class="container-fluid pt-5">
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Confirm information</h4>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            Name: <input type="text" asp-for="orderFullname" /><span asp-validation-for="orderFullname"></span>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            Description: <input type="text" asp-for="orderAddress" /><span asp-validation-for="orderAddress"></span>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            Date: <input type="text" asp-for="orderDate" /><span asp-validation-for="orderDate"></span>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            Telephone: <input type="text" asp-for="orderPhone" /><span asp-validation-for="orderPhone"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Order Total</h4>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="font-weight-medium mb-3">Products</h5>
-                        <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 1</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 2</p>
-                            <p>$150</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 3</p>
-                            <p>$150</p>
-                        </div>
-                        <hr class="mt-0">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">$10</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
-                        </div>
-                    </div>
-                </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+<section class="vh-100" style="background-color: #fffffc;">
+    <div class="container py-4 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <form asp-controller="Order" asp-action="Create" method="post">
+                            <h3 class="mb-5">Create Order</h3>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-floating">
+                                <input asp-for="orderFullname" autocomplete="orderFullname" class="form-control" aria-required="true" />
+                                <label asp-for="orderFullname">Full Name</label>
+                                <span asp-validation-for="orderFullname" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating">
+                                <input asp-for="orderAddress" autocomplete="orderAddress" class="form-control" aria-required="true" />
+                                <label asp-for="orderAddress">Address</label>
+                                <span asp-validation-for="orderAddress" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating">
+                                <input asp-for="orderDate" autocomplete="orderDate" class="form-control" aria-required="true" />
+                                <label asp-for="orderDate">Date</label>
+                                <span asp-validation-for="orderDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating">
+                                <input asp-for="orderPhone" autocomplete="orderPhone" class="form-control" aria-required="true" />
+                                <label asp-for="orderPhone">Phone Number</label>
+                                <span asp-validation-for="orderPhone" class="text-danger"></span>
+                            </div>
+
+                            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
+<</section>
+

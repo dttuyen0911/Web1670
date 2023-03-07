@@ -8,13 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\OrderDetail\**" />
     <Compile Remove="wwwroot\Image\**" />
-    <Content Remove="Views\OrderDetail\**" />
     <Content Remove="wwwroot\Image\**" />
-    <EmbeddedResource Remove="Views\OrderDetail\**" />
     <EmbeddedResource Remove="wwwroot\Image\**" />
-    <None Remove="Views\OrderDetail\**" />
     <None Remove="wwwroot\Image\**" />
   </ItemGroup>
 

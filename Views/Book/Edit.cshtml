@@ -4,6 +4,7 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
+
 <div id="main-wrapper">
      data-layout="vertical"
      data-navbarbg="skin5"
@@ -21,7 +22,9 @@
                         <div>
                             <section>
                                 <span asp-validation-for="bookName"></span>
+
                                 <label asp-for="bookName">Name</label> 
+
                                 <input type="text" asp-for="bookName" class="form-control" aria-required="true" />
 
                                 <span asp-validation-for="bookDescription"></span>

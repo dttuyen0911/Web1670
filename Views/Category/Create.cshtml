@@ -21,10 +21,11 @@
                     <form asp-controller="Category" asp-action="Create" method="post">
                         <div>
                             <section>
-                                <label asp-for="cateName">Name</label>
+                                <label asp-for="cateName">Name</label> <span asp-validation-for="cateName"></span>
                                 <input type="text" asp-for="cateName" class="form-control" aria-required="true" />
                                 <label asp-for="cateDescription">Description</label>
-                                <input type="text" asp-for="cateDescription" class="form-control" aria-required="true"/>
+                                <input type="text" asp-for="cateDescription" class="form-control" aria-required="true" />
+                                <span asp-validation-for="cateDescription"></span>
                             </section>
                         </div>
                         </br>
