@@ -1,7 +1,9 @@
 ﻿using GC02Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Net.WebSockets;
@@ -18,10 +20,12 @@ namespace Web1670.Controllers
         {
             _dbContext = dbContext;
         }
+        [Authorize(Roles = "Admin,Owner,User")]
         public IActionResult Index()
         {
             return View();
         }
+        [Authorize(Roles = "User")]
         public IActionResult DisplayOrder(Order obj) 
 
         {
@@ -29,13 +33,13 @@ namespace Web1670.Controllers
             List<Order> orders = _dbContext.orders.Where(o => o.cus_id == userID).ToList();
             return View(orders);
         }
-
+        [Authorize(Roles = "Admin,Owner")]
         public IActionResult Detail(Order obj) 
         {
             List<Order> order = _dbContext.orders.ToList();
             return View(order);
         }
-
+        [Authorize(Roles = "Admin,Owner,User")]
         [HttpPost]
         public async Task<IActionResult> Create(Order obj)
         {

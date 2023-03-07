@@ -78,10 +78,12 @@ namespace GC02Identity.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(48, ErrorMessage = "String length no more than 48 characters")]
             [Display(Name = "FirstName")]
             public string Firstname { get; set; }
 
             [Required]
+            [StringLength(48, ErrorMessage = "String length no more than 48 characters")]
             [Display(Name = "LastName")]
             public string Lastname { get; set; }
 
