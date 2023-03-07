@@ -4,47 +4,63 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
+<div id="main-wrapper"
+     data-layout="vertical"
+     data-navbarbg="skin5"
+     data-sidebartype="full"
+     data-sidebar-position="absolute"
+     data-header-position="absolute"
+     data-boxed-layout="full">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body wizard-content">
+                    <h4 class="card-title">Book Form</h4>
+                    <h6 class="card-subtitle"></h6>
+                    <form asp-controller="Book" asp-action="Create" enctype="multipart/form-data" method="post">
+                        <div>
+                            <section>
+                                <span asp-validation-for="bookName"></span>
+                                <label asp-for="bookName">Name</label> 
+                                <input type="text" asp-for="bookName" class="form-control" aria-required="true" />
 
-<form asp-controller="Book" asp-action="Create" enctype="multipart/form-data" method="post">
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Create book</h6>
-                    <form>
-                        <div class="mb-3">
-                            Name: <input type="text" asp-for="bookName" /><span asp-validation-for="bookName"></span>
+                                <span asp-validation-for="bookDescription"></span>
+                                <label asp-for="bookDescription">Description</label>
+                                <input type="text" asp-for="bookDescription" class="form-control" aria-required="true" />
+
+                                <span asp-validation-for="bookDate"></span>
+                                <label asp-for="bookDate">Datetime</label>
+                                <input type="date" asp-for="bookDate" class="form-control" aria-required="true" />
+                                
+                                <span asp-validation-for="bookQuantity"></span>
+                                <label asp-for="bookQuantity">Quantity</label>
+                                <input type="number" asp-for="bookQuantity" min="1" class="form-control" aria-required="true" />
+
+                                <span asp-validation-for="bookPrice"></span>
+                                <label asp-for="bookPrice">Price</label>
+                                <input type="number" asp-for="bookPrice" min="1" class="form-control" aria-required="true" />
+                                
+                                <div class="form-group">
+                                    <label asp-for="Publisher" class="control-label"></label>
+                                    <select asp-for="pubID" asp-items="ViewBag.pubID" class="form-control">
+                                        <option>Select Publisher</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Category" class="control-label"></label>
+                                    <select asp-for="cateID" asp-items="ViewBag.cateID" class="form-control">
+                                        <option>Select Publisher</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Image" class="control-label"></label>
+                                    <input asp-for="Image" type="file" onchange="chooseFile(this)" accept="image/gif, image/jpeg, image/png" style="width: 100%" class="form-control" />
+                                    <div> <img style="height:200px;width:250px" id="image" /></div>
+                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                </div>
+                            </section>
                         </div>
-                        <div class="mb-3">
-                            Description:<input type="text" asp-for="bookDescription" /><span asp-validation-for="bookDescription"></span>
-                        </div>
-                        <div class="mb-3">
-                            Datetime:<input type="date" asp-for="bookDate" /><span asp-validation-for="bookDate"></span>
-                        </div>
-                        <div class="mb-3">
-                            Quantity:<input type="number" asp-for="bookQuantity" min="1"/><span asp-validation-for="bookQuantity"></span>
-                        </div>
-                        <div class="mb-3">
-                            Price:<input type="number" asp-for="bookPrice" min="1"/><span asp-validation-for="bookPrice"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Publisher" class="control-label"></label>
-                            <select asp-for="pubID" asp-items="ViewBag.pubID" class="form-control">
-                                <option>Select Publisher</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Category" class="control-label"></label>
-                            <select asp-for="cateID" asp-items="ViewBag.cateID" class="form-control">
-                                <option>Select Publisher</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Image" class="control-label"></label>
-                            <input asp-for="Image" type="file" onchange="chooseFile(this)" accept="image/gif, image/jpeg, image/png" style="width: 100%" class="form-control" />
-                            <div> <img style="height:200px;width:250px" id="image" /></div>
-                            <span asp-validation-for="Image" class="text-danger"></span>
-                        </div>
+                        </br>
                         <input type="submit" value="Submit" />
                         <a asp-action="Index"> Back to list</a>
                     </form>
@@ -52,7 +68,7 @@
             </div>
         </div>
     </div>
-</form>
+</div>
 <script>
     function chooseFile(fileInput) {
         if (fileInput.files && fileInput.files[0]) {
@@ -65,3 +81,5 @@
         }
     }
 </script>
+
+
