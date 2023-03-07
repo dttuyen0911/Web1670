@@ -5,8 +5,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
+<<<<<<< HEAD
+=======
 @using Web1670.Models
 
+>>>>>>> 3c9d81899f5b0a81fda17e79c7cd10af02a45034
 <div id="main-wrapper"
      data-layout="vertical"
      data-navbarbg="skin5"
@@ -18,6 +21,18 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body wizard-content">
+<<<<<<< HEAD
+                    <h4 class="card-title">Category Form</h4>
+                    <h6 class="card-subtitle"></h6>
+                    <form asp-controller="Category" asp-action="Edit" method="post">
+                        <div>
+                            <section>
+                                <label asp-for="cateName">Name</label> <span asp-validation-for="cateName"></span>
+                                <input type="text" asp-for="cateName" class="form-control" aria-required="true" />
+                                <label asp-for="cateDescription">Description</label>
+                                <input type="text" asp-for="cateDescription" class="form-control" aria-required="true" />
+                                <span asp-validation-for="cateDescription"></span>
+=======
                     <h4 class="card-title">Update Category</h4>
                     <h6 class="card-subtitle"></h6>
                     <form asp-controller="Category" asp-action="Create" method="post">
@@ -27,12 +42,20 @@
                                 <input type="text" asp-for="cateName" class="form-control" aria-required="true" />
                                 <label asp-for="cateDescription">Description</label>
                                 <input type="text" asp-for="cateDescription" class="form-control" aria-required="true"/>
+>>>>>>> 3c9d81899f5b0a81fda17e79c7cd10af02a45034
                             </section>
                         </div>
                         </br>
                         <input type="submit" value="Submit" />
                         <a asp-action="Index"> Back to list</a>
                     </form>
+<<<<<<< HEAD
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+=======
                 </div>
             </div>
         </div>
@@ -60,3 +83,4 @@
         </div>
     </div>
 </form> *@
+>>>>>>> 3c9d81899f5b0a81fda17e79c7cd10af02a45034
