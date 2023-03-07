@@ -4,7 +4,8 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_LayoutOwner.cshtml";
 }
-<div id="main-wrapper"
+
+<div id="main-wrapper">
      data-layout="vertical"
      data-navbarbg="skin5"
      data-sidebartype="full"
@@ -21,7 +22,9 @@
                         <div>
                             <section>
                                 <span asp-validation-for="bookName"></span>
-                                <label asp-for="bookName">Name</label>
+
+                                <label asp-for="bookName">Name</label> 
+
                                 <input type="text" asp-for="bookName" class="form-control" aria-required="true" />
 
                                 <span asp-validation-for="bookDescription"></span>
@@ -31,15 +34,15 @@
                                 <span asp-validation-for="bookDate"></span>
                                 <label asp-for="bookDate">Datetime</label>
                                 <input type="date" asp-for="bookDate" class="form-control" aria-required="true" />
-
+                                
                                 <span asp-validation-for="bookQuantity"></span>
                                 <label asp-for="bookQuantity">Quantity</label>
-                                <input type="text" asp-for="bookQuantity" min="1" class="form-control" aria-required="true" />
+                                <input type="number" asp-for="bookQuantity" min="1" class="form-control" aria-required="true" />
 
                                 <span asp-validation-for="bookPrice"></span>
                                 <label asp-for="bookPrice">Price</label>
-                                <input type="text" asp-for="bookPrice" min="1" class="form-control" aria-required="true" />
-
+                                <input type="number" asp-for="bookPrice" min="1" class="form-control" aria-required="true" />
+                                
                                 <div class="form-group">
                                     <label asp-for="Publisher" class="control-label"></label>
                                     <select asp-for="pubID" asp-items="ViewBag.pubID" class="form-control">

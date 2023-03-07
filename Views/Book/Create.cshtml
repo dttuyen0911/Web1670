@@ -34,11 +34,12 @@
                                 
                                 <span asp-validation-for="bookQuantity"></span>
                                 <label asp-for="bookQuantity">Quantity</label>
-                                <input type="text" asp-for="bookQuantity" min="1" class="form-control" aria-required="true" />
+
+                                <input type="number" asp-for="bookQuantity" min="1" class="form-control" aria-required="true" />
 
                                 <span asp-validation-for="bookPrice"></span>
                                 <label asp-for="bookPrice">Price</label>
-                                <input type="text" asp-for="bookPrice" min="1" class="form-control" aria-required="true" />
+                                <input type="number" asp-for="bookPrice" min="1" class="form-control" aria-required="true" />
                                 
                                 <div class="form-group">
                                     <label asp-for="Publisher" class="control-label"></label>
