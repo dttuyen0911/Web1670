@@ -77,6 +77,7 @@ namespace Web1670.Controllers
                         od.orderID = or.orderID;
                         od.amount = od.price * od.quantity;
                         od.OrderDetailDate = or.orderDate;
+                        updateQuantityBook(od.bookID, od.quantity);
                         or.orderdetails.Add(od);
                         //string data = JsonSerializer.Serialize<Order>(or);
                     }
@@ -117,6 +118,15 @@ namespace Web1670.Controllers
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var KEY = userID.ToString();
             return KEY;
+        }
+        public void updateQuantityBook(int id, int quantity)
+        {
+            Book obj = _dbContext.books.Find(id);
+            if(obj != null)
+            {
+                int num = (int)(obj.bookQuantity - quantity);
+                obj.bookQuantity = num;
+            }
         }
     }
 }
