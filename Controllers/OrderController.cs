@@ -23,6 +23,7 @@ namespace Web1670.Controllers
         [Authorize(Roles = "Admin,Owner,User")]
         public IActionResult Index()
         {
+            ViewBag.CurrentDate = DateTime.Now;
             return View();
         }
         [Authorize(Roles = "User")]
@@ -45,13 +46,14 @@ namespace Web1670.Controllers
         {
             var userID = GetID();
             obj.cus_id = userID;
-            
+    
             var cart = GetCartItems();
             Order or = new Order();
             or = obj;
             or.cus_id = userID;
             or.owner_id = "jkasdf";
             or.OrderTotal = 0;
+            or.orderDate = DateTime.Now;
             or.orderAddress = obj.orderAddress;
             or.orderFullname = obj.orderFullname;
             or.orderdetails = new List<OrderDetail>();
@@ -76,9 +78,8 @@ namespace Web1670.Controllers
         }
         void ClearCart()
         {
-            List<Cart> cart = GetCartItems();   
-            cart.Clear();
-            SaveCartSession(cart);
+            var session = HttpContext.Session;
+            session.Remove(CARTKEY);
         }
         void SaveCartSession(List<Cart> ls)
         {
@@ -100,7 +101,6 @@ namespace Web1670.Controllers
             }
             return new List<Cart>();
         }
-
         public string GetID()
         {
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);

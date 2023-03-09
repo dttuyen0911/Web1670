@@ -56,6 +56,8 @@ namespace GC02Identity.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Phone]
+            [Required(ErrorMessage = "Telephone of publisher is not null")]
+            [RegularExpression(@"^\d[0-9]{10}$", ErrorMessage = "Phone numbers that only accept 10 numbers are allowed or telephone is number")]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }
