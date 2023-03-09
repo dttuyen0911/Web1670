@@ -1,6 +1,7 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System.Security.Claims;
@@ -35,23 +36,7 @@ namespace Web1670.Controllers
             }
             return new List<Cart>();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Cart obj)
-        //{
-        //    var userID = GetID();
-        //    obj.cus_id = userID;
 
-        //    var cart = GetCartItems();
-        //    Cart carts = new Cart();
-        //    carts = obj;
-        //    carts.cus_id = userID;
-        //    carts.cartID = obj.cartID;
-        //    carts.cartQuantity = obj.cartQuantity;
-        //    carts.book.bookID = obj.book.bookID;
-        //    _dbContext.carts.Add(carts);
-        //    _dbContext.SaveChanges();
-        //    return View(carts);
-        //}
         void ClearCart()
         {
             var session = HttpContext.Session;
@@ -114,6 +99,10 @@ namespace Web1670.Controllers
                 if(quanty < 0)
                 {
                     return RedirectToAction(nameof(Cart));
+                }
+                if(quanty > cartitem.book.bookQuantity)
+                {
+                    ModelState.AddModelError("Quantity", "Quantity must not exceed the available stock");
                 }
                 else
                 {

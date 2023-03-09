@@ -70,7 +70,7 @@ namespace Web1670.Controllers
             return uniqueFileName;
         }
         [Authorize(Roles = "Admin,Owner")]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, string img)
         {
             ViewData["pubID"] = new SelectList(_dbContext.publishers, "pubID", "pubName");
             ViewData["cateID"] = new SelectList(_dbContext.categories.ToList(), "cateID", "cateName");
@@ -89,6 +89,7 @@ namespace Web1670.Controllers
             {
                 if (obj.Image == null)
                 {
+                    obj.bookID = id;
                     obj.urlImage = img;
                     _dbContext.books.Update(obj);
                     _dbContext.SaveChanges();
