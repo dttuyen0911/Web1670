@@ -77,8 +77,6 @@ namespace Web1670.Controllers
                         od.orderID = or.orderID;
                         od.amount = od.price * od.quantity;
                         od.OrderDetailDate = or.orderDate;
-                        int qu = GetQuantityBook();
-                        int 
 
                         or.orderdetails.Add(od);
                         //string data = JsonSerializer.Serialize<Order>(or);
