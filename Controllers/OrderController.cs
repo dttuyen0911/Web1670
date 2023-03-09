@@ -77,7 +77,6 @@ namespace Web1670.Controllers
                         od.orderID = or.orderID;
                         od.amount = od.price * od.quantity;
                         od.OrderDetailDate = or.orderDate;
-                        List<Book> book = _dbContext.books.Where(b => b.bookID == od.bookID).ToList();
                         or.orderdetails.Add(od);
                         //string data = JsonSerializer.Serialize<Order>(or);
                     }
@@ -118,11 +117,6 @@ namespace Web1670.Controllers
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var KEY = userID.ToString();
             return KEY;
-        }
-        public int GetBookID(Book obj)
-        {
-            var q = obj.bookQuantity;
-            return (int)q;
         }
     }
 }
