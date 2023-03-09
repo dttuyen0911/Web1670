@@ -128,7 +128,7 @@ namespace GC02Identity.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             Input = new InputModel()
             {
-                RoleList = _roleManager.Roles.Where(r=> r.Name!="Admin").Select(x => x.Name).Select(i => new SelectListItem{
+                RoleList = _roleManager.Roles.Where(r => r.Name != "Admin").Select(x => x.Name).Select(i => new SelectListItem{
                     Text = i,
                     Value = i
                 })

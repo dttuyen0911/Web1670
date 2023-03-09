@@ -1,6 +1,7 @@
 ﻿using GC02Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Data;
@@ -26,8 +27,8 @@ namespace Web1670.Controllers
             ViewBag.CurrentDate = DateTime.Now;
             return View();
         }
-        [Authorize(Roles = "User")]
-        public IActionResult DisplayOrder(Order obj) 
+        [Authorize(Roles = "Admin,Owner,User")]
+        public IActionResult DisplayOrder(Order obj)
 
         {
             var userID = GetID();
@@ -35,7 +36,7 @@ namespace Web1670.Controllers
             return View(orders);
         }
         [Authorize(Roles = "Admin,Owner")]
-        public IActionResult Detail(Order obj) 
+        public IActionResult Detail(Order obj)
         {
             List<Order> order = _dbContext.orders.ToList();
             return View(order);
@@ -44,37 +45,50 @@ namespace Web1670.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Order obj)
         {
-            var userID = GetID();
-            obj.cus_id = userID;
-    
-            var cart = GetCartItems();
-            Order or = new Order();
-            or = obj;
-            or.cus_id = userID;
-            or.owner_id = "jkasdf";
-            or.OrderTotal = 0;
-            or.orderDate = DateTime.Now;
-            or.orderAddress = obj.orderAddress;
-            or.orderFullname = obj.orderFullname;
-            or.orderdetails = new List<OrderDetail>();
-            if (cart != null) {
-                foreach (var item in cart)
-                {
-                    OrderDetail od = new OrderDetail();
-                    od.bookID = item.book.bookID;
-                    od.quantity = item.cartQuantity;
-                    od.price += item.cartQuantity * item.book.bookPrice;
-                    or.OrderTotal += od.price;
-                    od.orderID = or.orderID;
-                    od.amount = od.price * od.quantity;
-                    or.orderdetails.Add(od);
-                    //string data = JsonSerializer.Serialize<Order>(or);
-                }
+            if (obj.orderFullname == null || obj.orderAddress == null || obj.orderPhone == null)
+            {
+                return RedirectToAction("Index");
             }
-             _dbContext.orders.Add(or);
-             _dbContext.SaveChanges();
-             ClearCart();
-             return RedirectToAction("DisplayOrder");
+            else
+            {
+                var userID = GetID();
+                obj.cus_id = userID;
+
+                var cart = GetCartItems();
+                Order or = new Order();
+                or = obj;
+                or.cus_id = userID;
+                or.owner_id = "jkasdf";
+                or.OrderTotal = 0;
+                or.orderDate = DateTime.Now;
+                or.orderAddress = obj.orderAddress;
+                or.orderFullname = obj.orderFullname;
+                or.orderPhone = obj.orderPhone;
+                or.orderdetails = new List<OrderDetail>();
+                if (cart != null)
+                {
+                    foreach (var item in cart)
+                    {
+                        OrderDetail od = new OrderDetail();
+                        od.bookID = item.book.bookID;
+                        od.quantity = item.cartQuantity;
+                        od.price += item.cartQuantity * item.book.bookPrice;
+                        or.OrderTotal += od.price;
+                        od.orderID = or.orderID;
+                        od.amount = od.price * od.quantity;
+                        od.OrderDetailDate = or.orderDate;
+                        int qu = GetQuantityBook();
+                        int 
+
+                        or.orderdetails.Add(od);
+                        //string data = JsonSerializer.Serialize<Order>(or);
+                    }
+                }
+                _dbContext.orders.Add(or);
+                _dbContext.SaveChanges();
+                ClearCart();
+                return RedirectToAction("DisplayOrder");
+            }
         }
         void ClearCart()
         {
@@ -106,6 +120,11 @@ namespace Web1670.Controllers
             var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var KEY = userID.ToString();
             return KEY;
+        }
+        public int GetQuantityBook(Book obj)
+        {
+            var q = obj.bookQuantity;
+            return (int)q;
         }
     }
 }

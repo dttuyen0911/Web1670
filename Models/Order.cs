@@ -11,13 +11,14 @@ namespace Web1670.Models
         public DateTime orderDate { get; set; }
         [Required(ErrorMessage = "Telephone of publisher is not null")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone numbers that only accept 10 numbers are allowed")]
+        [StringLength(50, MinimumLength = 3)]
         public string orderPhone { get; set; }
         [Required(ErrorMessage = "Address of publisher is not null")]
-        [StringLength(255, ErrorMessage = "String length no more than 255 characters")]
+        [StringLength(255, MinimumLength =3, ErrorMessage = "String length no more than 255 characters")]
         public string orderAddress { get; set; }
         [Required(ErrorMessage = "Name of category is not null")]
         [RegularExpression(@"^[a-zA-Z\s\W]+$", ErrorMessage = "Name must be character")]
-        [StringLength(150, ErrorMessage = "String length no more than 150 characters")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "String length no more than 150 characters")]
         public string orderFullname { get; set; }
         public double OrderTotal { get; set; }
         public string cus_id { get; set; }
