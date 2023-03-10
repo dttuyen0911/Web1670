@@ -52,9 +52,6 @@ namespace Web1670.Controllers
         public IActionResult AddToCart(int id)
         {
             var book = _dbContext.books.Where(p => p.bookID == id).FirstOrDefault();
-            if (book == null)
-                return NotFound("Cart empty");
-
             var cart = GetCartItems();
             var cartitem = cart.Find(p => p.book.bookID == id);
             if (cartitem != null)
@@ -102,7 +99,7 @@ namespace Web1670.Controllers
                 }
                 if(quanty > cartitem.book.bookQuantity)
                 {
-                    ModelState.AddModelError("Quantity", "Quantity must not exceed the available stock");
+                    TempData["Message"] = "Quantity must not exceed the available stock";
                 }
                 else
                 {

@@ -53,7 +53,6 @@ namespace Web1670.Controllers
             {
                 var userID = GetID();
                 obj.cus_id = userID;
-
                 var cart = GetCartItems();
                 Order or = new Order();
                 or = obj;
@@ -79,7 +78,6 @@ namespace Web1670.Controllers
                         od.OrderDetailDate = or.orderDate;
                         updateQuantityBook(od.bookID, od.quantity);
                         or.orderdetails.Add(od);
-                        //string data = JsonSerializer.Serialize<Order>(or);
                     }
                 }
                 _dbContext.orders.Add(or);
